@@ -1,67 +1,72 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const path = require('path')
-var indexRouter = require('./app/index');
+
+require('dotenv').config();
+const path          = require('path');
+const express       = require('express');
+const app           = express();
+var cors            = require('cors');
+var http            = require('http').Server(app);
+var io              = require('socket.io')(http);
+var bodyParser      = require('body-parser');
+
+app.use(cors());
+app.use(bodyParser.json()); // Para recibir json desde Angular
+app.use("/app/frontend-votaciones", express.static(path.join(__dirname, 'app/frontend-votaciones')));
+app.use("/images", express.static(path.join(__dirname, 'app/images')));
+app.use('/api', require('./app/controllers/routes'));
 
 
+app.get('/chat', function(req, res){
+    res.sendFile(__dirname + '/views/index.html');
+});
 
-const express = require('express')
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+app.get('/', function(req, res){
+    res.writeHead(301,
+        { Location: 'app/frontend-votaciones/' }
+    );
+    res.end();
+});
+    
+
 
 self 		  = this;
 self.io 	= io;
 
-app.set('views', path.join(__dirname, 'views'));
+var count_clients   = 0;
+var all_clts 		  = [];
+var info_evento 	= {};
 
 
-//app.use(express.json());
-app.use(express.static(path.join(__dirname, 'app/votaciones')));
-
-// app.get('/', (req, res) => res.send('Hello World!'));
-
-
-app.use('/', indexRouter);
-//app.use('/users', usersRouter);
-
-
-/*
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-*/
-
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
+http.listen(process.env.NODE_PORT, function(){
+  console.log('listening on *:'+process.env.NODE_PORT);
 });
 
 
 
-http.listen(3000, function(){
-  console.log('Escuchando en el puerto *:3000');
-});
 
 
+self.io.on('connection', (socket)=> {
+    console.log('New connection: '+socket.id);
 
-all_clts = [];
-  
+    count_clients++;
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  
-  cliente = {};
-  cliente.id      = socket.id;
-  cliente.fecha   = socket.handshake.time;
-  
-  
-  all_clts.push(cliente);
-  io.emit('cliente_conectado', cliente );
-  
+    datos 					= {};
+    datos.logged 			= false;
+    datos.registered 		= false;
+    datos.resourceId		= socket.id;
+    datos.respondidas		= 0;
+    datos.tiempo			= 0;
+    datos.nombre_punto		= 'Punto_' + count_clients;
+    datos.user_data 		= {};
+    socket.datos 			= datos;
+
+    all_clts.push(socket.datos);
+
+    socket.emit('te_conectaste', {datos: socket.datos});
+    socket.broadcast.emit('conectado:alguien', {clt: socket.datos} );
+
   
   socket.on('mensaje', (data)=>{
     if (data.nombre_punto) {
@@ -102,18 +107,6 @@ io.on('connection', function(socket){
   });
 
 
-  socket.on('necesito_puestos', (data)=>{
-    console.log('Alguien escribió: que necesito_puestos', all_clts);
-    
-    puestos = [];
-
-    for (var i = 0; i < all_clts.length; i++) {
-      if (all_clts[i].tipo == 'Puesto'){
-        puestos.push(all_clts[i]);
-      }
-    }
-    socket.emit('toma_los_puestos', {puestos: all_clts} );
-  });
 
 
 });
