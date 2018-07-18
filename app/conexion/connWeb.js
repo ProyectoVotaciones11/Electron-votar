@@ -4,9 +4,6 @@ require('dotenv').config();
 var db;
 
 
-
-
-
 class Database {
     
     constructor( ) {

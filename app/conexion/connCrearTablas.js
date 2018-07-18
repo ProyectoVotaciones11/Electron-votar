@@ -1,53 +1,41 @@
 require('dotenv').config();
 
-sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (id integer," +
-                "nombres varchar(100)  NOT NULL collate nocase," +
-                "apellidos varchar(100)  DEFAULT NULL collate nocase," +
-                "sexo varchar(100)  NOT NULL," +
-                "username varchar(100)  NOT NULL collate nocase," +
-                "password varchar(100)  NOT NULL collate nocase," +
-                "prueba_id integer(100)  DEFAULT NULL," +
-                "tipo integer DEFAULT '0')";
+     sqlParticipantes = "CREATE TABLE IF NOT EXISTS Participantes (id integer," +
+                        "Nombres varchar(100)  NOT NULL collate nocase," +
+                        "Apellidos varchar(100)  NOT NULL collate nocase," +
+                        "Sexo varchar(1)  DEFAULT NULL collate nocase," +
+                        "Grupo_id integer (100)  DEFAULT NULL collate nocase," +
+                        "Votacion_id integer(100)  DEFAULT NULL collate nocase," +
+                        "Username varchar (100)  DEFAULT NULL collate nocase," +
+                        "Password varchar(100)  NOT NULL,"+
+                        "Tipo varchar(100)  NOT NULL)";
+         
+         sqlCandidatos = "CREATE TABLE IF NOT EXISTS Candidatos (id integer," +
+                        "Nombres varchar(100)  NOT NULL collate nocase," +
+                        "Apellidos varchar(100)  NOT NULL collate nocase," +
+                        "Sexo varchar(1)  DEFAULT NULL collate nocase," +
+                        "Grupo_id integer (100)  DEFAULT NULL collate nocase," +
+                        "Foto integer(100)  DEFAULT NULL collate nocase," +
+                        "aspiracion_id integer(100)  NOT NULL)";
+         
+         sqlVotaciones = "CREATE TABLE IF NOT EXISTS Votaciones (id integer," +
+                        "Nombre varchar(100)  NOT NULL collate nocase," +
+                        "Alias varchar(100)  NOT NULL collate nocase," +
+                        "descripcion varchar(100)  DEFAULT NULL collate nocase," +
+                        "Username varchar (100)  DEFAULT NULL collate nocase," +
+                        "Password varchar(100)  NOT NULL)";
 
-sqlPreguntas = "CREATE TABLE IF NOT EXISTS preguntas (id integer," +
-                "definicion varchar(300)  NOT NULL collate nocase," +
-                "tipo varchar(100)  NOT NULL collate nocase," +
-                "prueba_id integer(100)  DEFAULT NULL," +
-                "opc_a varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_b varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_c varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_d varchar(100)  DEFAULT NULL collate nocase," +
-                "correcta varchar(100)  NOT NULL collate nocase," +
-                "defini_img varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_a_img varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_b_img varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_c_img varchar(100)  DEFAULT NULL collate nocase," +
-                "opc_d_img varchar(100)  DEFAULT NULL collate nocase," +
-                "puntos varchar(100)  DEFAULT NULL collate nocase)";
+        sqlVotos = "CREATE TABLE IF NOT EXISTS Votos (id integer," +
+                        "Participante_id integer(100)  NOT NULL collate nocase," +
+                        "candidato_id integer(100)  NOT NULL collate nocase," +
+                        "aspiracion_id integer(100)  DEFAULT NULL collate nocase," +
+                        "fecha_hora date(100)  NOT NULL)";
 
-sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
-                "preg_id integer(100)  NOT NULL," +
-                "usuario_id integer(100)  DEFAULT NULL," +
-                "opcion_elegida varchar(100)  NOT NULL," +
-                "correcta varchar(100)  NOT NULL collate nocase," +
-                "duracion varchar(100)  NOT NULL collate nocase)";       
-  
-  sqlPruebas = "CREATE TABLE IF NOT EXISTS pruebas (id integer," +
-                "nombre varchar(100)  NOT NULL collate nocase," +
-                "alias varchar(100)  DEFAULT NULL collate nocase," +
-                "dirigido varchar(100)  NOT NULL," +
-                "mostrar_respuesta varchar(100)  NOT NULL collate nocase," +
-                "puntos_promedio varchar(100)  NOT NULL collate nocase," +
-                "tiempo_preg varchar(100)  NOT NULL collate nocase," +
-                "actual integer(1)  DEFAULT NULL," +
-                "tiempo_exam varchar(100)  NOT NULL collate nocase)";  
-           
-
-
-
-
-
-            
+        sqlAspiracion = "CREATE TABLE IF NOT EXISTS Aspiraciones (id integer," +
+                        "aspiracion varchar(100)  NOT NULL collate nocase," +
+                        "votacion_id integer(100)  NOT NULL," +
+                        "descripcion varchar(100)  DEFAULT NULL)"; 
+      
 
 function createTable() {
     
@@ -55,17 +43,20 @@ function createTable() {
     
         db = require('../conexion/connWeb');
         //db = new db();
-        db.query(sqlUsuarios).then(function(res){
-            console.log('tabla Usuarios creada');
-            return db.query(sqlPreguntas);
+        db.query(sqlParticipantes).then(function(res){
+            console.log('Tabla Participantes creada');
+            return db.query(sqlCandidatos);
         }).then(function(res){
-            console.log('tabla Preguntas creada');
-            return db.query(sqlRespuestas);
+            console.log('Tabla Candidatos creada');
+            return db.query(sqlVotaciones);
         }).then(function(res){
-            console.log('tabla Respuestas creada');
-            return db.query(sqlPruebas);
+            console.log('Tabla Votaciones creada');
+            return db.query(sqlVotos);
         }).then(function(res){
-            console.log('tabla user_event creada');
+            console.log('Tabla Votos creada');
+            return db.query(sqlAspiracion);
+        }).then(function(res){
+            console.log('Tabla Aspiraciones creada');
             console.log('TODAS LAS TABLAS CREADAS');
         })
         

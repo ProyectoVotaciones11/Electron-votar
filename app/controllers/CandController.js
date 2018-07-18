@@ -14,11 +14,10 @@ router.route('/cambiar-pass').get(getCambiarPassHandler);
 
 function getRouteHandler(req, res) {
 
-	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid";
+	consulta = "SELECT C.*, C.rowid, a.aspiracion from Candidatos C INNER JOIN Aspiraciones a ON C.aspiracion_id = a.rowid ";
 	db.query(consulta).then(function(result){
-        Participantes = result ;
-    	res.json(Participantes);	
-
+        Candidatos = result ;
+    	res.json(Candidatos);
     }, function(error){
 		
 	})
@@ -31,10 +30,10 @@ function postRouteHandler(req, res) {
 
 function getEditarHandler(req, res) {
 
-	consulta = "UPDATE Participantes  SET  Nombres=? , Apellidos=? , Username=?, Password=?, Sexo=? , Grupo_id=? , Votacion_id=? , Tipo=? WHERE rowid=? ";
+	consulta = "UPDATE Candidatos  SET Nombres=? , Apellidos=? , Sexo=? , Grupo_id=? , Foto=?, aspiracion_id=? WHERE rowid=?  ";
 	params = req.query;
 
-	datos = [params.Nombres, params.Apellidos, params.Username, params.Password, params.Sexo, params.Grupo_id, params.Votacion_id, params.Tipo , params.rowid];     
+	datos = [params.Nombres, params.Apellidos, params.Sexo, params.Grupo_id, params.Foto , params.aspiracion_id, params.rowid];     
 	db.query(consulta, datos).then (function(result){
      
         res.send('Editado');
@@ -45,7 +44,7 @@ function getEditarHandler(req, res) {
 }
 
 function getCambiarPassHandler(req, res) {
-   consulta = "update  Participantes set password=? where rowid=?";
+   consulta = "update  Candidatos set password=? where rowid=?";
 	
 	db.query(consulta, [ req.query.password, req.query.rowid]).then (function(result){
 		res.send('Cambiado');
@@ -58,9 +57,9 @@ function getCambiarPassHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 
-	consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
+	consulta = "INSERT INTO Candidatos( Nombres, Apellidos, Sexo, Grupo_id,  Foto, aspiracion_id ) VALUES( ?, ?, ?, ?, ?, ?)";
 	params = req.query;
-	datos = [params.Nombres, params.Apellidos, params.Username, params.Password, params.Sexo, params.Grupo_id, params.Votacion_id, params.Tipo];     
+	datos = [params.Nombres, params.Apellidos, params.Sexo, params.Grupo_id, params.Foto, params.aspiracion_id];     
 	db.query(consulta, datos).then (function(result){
         res.send('Insertado');
 	}, function(error){
@@ -68,9 +67,10 @@ function getInsertarHandler(req, res) {
 	})
 };
 
+
 function deleteUsuarioHandler(req, res) {
     
-	consulta = "DELETE FROM Participantes WHERE rowid = ? ";
+	consulta = "DELETE FROM Candidatos WHERE rowid = ? ";
 	db.query(consulta, [req.query.id]).then (function(result){
 		res.send('Eliminado');
 	}, function(error){
@@ -78,5 +78,6 @@ function deleteUsuarioHandler(req, res) {
 		res.status(400).send({ error: error })
 	})
 }
+
                   
 module.exports = router;

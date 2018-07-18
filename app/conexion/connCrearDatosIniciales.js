@@ -1,34 +1,28 @@
 require('dotenv').config();
 
-
-
-
-            
-
 function crearDatosIniciales() {
     
     return new Promise(function(resolve, reject) {
     
         db = require('../conexion/connWeb');
         
-        db.query('SELECT * FROM usuarios').then(function(result){
+        db.query('SELECT * FROM Participantes').then(function(result){
             return new Promise(function(resolve2, reject2) {
                 if (result.length > 0) {
-                    resolve2('Usuarios ya estaban Insertados');
+                    resolve2('Participantes ya estaban Insertados');
                 }else{
-                    
                     hash_password   = '123';
-                    consulta = "INSERT INTO `usuarios` VALUES (1,'JORGE', 'CELEDON', 'jorge', '" + hash_password + "', 1, 'Admin', 'M')," +
-                                                             "(2,'JUAN CAMILO', 'MANRRIQUE', 'juan','" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(3,'EDILSON', 'MARQUEZ', 'edilson', '" + hash_password + "', 1, 'Usuario', 'M')," +
-                                                             "(4,'FELIX', 'DÍAZ', 'felix', '" + hash_password + "', 1, 'Usuario',  'M')," +
-                                                             "(5,'ERIK', 'ESLAVA', 'erik', '" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(6,'MEMO', 'SILVA', 'memo','" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(7,'JOSETH', 'GUERRERO', 'joseth', '" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(8,'DANIEL', 'GRANDAS', 'daniel',  '" + hash_password + "', 1, 'Usuario', 'M')" ; 
+                    consulta = "INSERT INTO `Participantes` VALUES ('1','Kevin Daniel', 'Eslava Barroso' , 'M', '11' , '1' , 'Kedaesva', '" + hash_password + "', 'Admin')," +
+                                                                   "('2','Yeison Felmaber', 'Eslava Barroso', 'M', '11' , '1' , 'yextrun','" + hash_password + "', 'Participante')," +
+                                                                   "('3','keinny Zusette', 'Ferrer Quirife', 'F', '11' , '1' , 'Keinny', '" + hash_password + "', 'Participante')," +
+                                                                   "('4','Angel Guillermo', 'Peñaredonda Silva', 'M', '11' , '1' , 'Memo', '" + hash_password + "', 'Participante')," +
+                                                                   "('5','Jhan Carlos','Ruda Prada','M', '11' , '1' , 'erik', '" + hash_password + "', 'Participante')," +
+                                                                   "('6','Leidy Paola',' Garcia Parra' ,'F', '11' , '1' , 'paola','" + hash_password + "', 'Participante')," +
+                                                                   "('7','Martin Daniel','Rincon Molina', 'M', '11' , '1' , 'gandal', '" + hash_password + "', 'Participante')," +
+                                                                   "('8','Juan Fernando','Eslava Vanegas', 'M', '11' , '1' , 'heraldo3',  '" + hash_password + "', 'Participante')" ; 
                                                              
                     db.query(consulta).then(function(res){
-                        resolve2('Usuarios Insertados');
+                        resolve2('Participantes Insertados');
                     })
                     
                 }
@@ -36,24 +30,25 @@ function crearDatosIniciales() {
         })
         .then(function(data){
             return new Promise(function(resolve2, reject2) {
-                db.query('SELECT * FROM preguntas').then(function(result){
+                db.query('SELECT * FROM Candidatos').then(function(result){
                 
                     if (result.length > 0) {
-                        resolve2('Preguntas ya estaban Insertados');
+                        resolve2('Candidatos ya estaban Insertados');
                     }else{
                         
                        
-                        consulta        = "INSERT INTO `preguntas`(id, definicion, tipo, prueba_id, opc_a, opc_b, opc_c, opc_d, correcta) VALUES(1,'¿De donde era Simon Bolivar?', 'Múltiple', 1,  'Colombia', 'Venezuela', 'Francia', 'España', 'B'), " +
-                                                                  "(2,'Cuánto es 51 + 14?', 'Múltiple', 1,  '66', '65', '64', '53', 'B'), " +
-                                                                  "(3,'Cuál día es el de descanso?', 'Múltiple', 1,  'Quinto', 'Septimo', 'Sexto', 'Octavo', 'B'), " +
-                                                                  "(4,'Cual es el libro mas corto de la biblia?', 'Múltiple', 1,  '2° Juan', '1° Juan', 'Salmos', 'Genesis', 'A'), " +
-                                                                  "(5,'quien fue Albert Einstein?', 'Múltiple', 1,  'físico estadounidense', 'Escritor ruso', 'físico alemán', 'Escritor aleman', 'C'), " +
-                                                                  "(6,'Cuanto es √3?', 'Múltiple', 1,  '1,732', '0,435', '29.19', '1,23', 'A'), " +
-                                                                  "(7,'que discipulo traiciono a Jesus?', 'Múltiple', 1,  'Juan', 'Eliceo', 'Choncas', 'Judas Iscariote', 'D'), " +
-                                                                  "(8,'quien es Dios ?', 'Múltiple', 1,  'pues Dios', 'lo ve todo', 'lo es todo', 'Un ente todo poderoso', 'D')" ;
+                        consulta        = "INSERT INTO `Candidatos` VALUES('1','keinny Zusette', 'Ferrer Quirife', 'F', '11' ,'images/users/2.jpg', 1), " +
+                                                                  "('2','Kevin Daniel','Eslava Barroso','M','11','images/users/1.jpg','2'), " +
+                                                                  "('3','Juan Fernando','Eslava Vanegas','M','11','images/users/4.jpg','3'), " +
+                                                                  "('4','Jhan Carlos','Ruda Prada','M','11','images/users/5.jpg','1'), " +
+                                                                  "('5','Yeison Felmaber','Eslava Barroso','M','11','images/users/7.jpg','2'), " +
+                                                                  "('6','Andres David','Mendieta Olivera','M','11','images/users/8.jpg','3'), " +
+                                                                  "('7','Martin Daniel','Rincon Molina','M','11','images/users/7.jpg','1'), " +
+                                                                  "('8','Leidy Paola',' Garcia Parra','F','11','images/users/3.jpg','2'), " +
+                                                                  "('9','Angel Guillermo','Peñaredonda Silva','M','11','images/users/5.jpg','3')" ;
                                                                   
                         db.query(consulta).then(function(res){
-                            resolve2('Preguntas Insertadas');
+                            resolve2('Candidatos Insertados');
                         })
                         
                     }
@@ -62,15 +57,59 @@ function crearDatosIniciales() {
         })
         .then(function(data){
             return new Promise(function(resolve2, reject2) {
-                db.query('SELECT * FROM pruebas').then(function(result){
+                db.query('SELECT * FROM Votaciones').then(function(result){
                 
                     if (result.length > 0) {
-                        resolve2('Pruebas ya estaban Insertadas');
+                        resolve2('Votaciones ya estaban Insertadas');
+                    }else{
+
+                        hash_password   = '123'
+                        
+                        consulta = "INSERT INTO `Votaciones` VALUES ('1','Votacion Estudiantiles 2018','VTE2018','Se elije a un personero, representante y contralor de los estudiantes','Vota2018','" + hash_password + "'),"+
+                                                              "('2','Votaciones NaVi 2018','VNV2018','Se elije a NaVi de 11','VotNavi2018','" + hash_password + "')";
+                        db.query(consulta).then(function(res){
+                            resolve2('Votaciones Insertadas');
+                        })
+                        
+                    }
+                })
+            })
+        })
+
+        .then(function(data){
+            return new Promise(function(resolve2, reject2) {
+                db.query('SELECT * FROM Aspiraciones').then(function(result){
+                
+                    if (result.length > 0) {
+                        resolve2('Aspiraciones ya estaban Insertadas');
                     }else{
                         
-                        consulta = "INSERT INTO `pruebas` VALUES (1, 'Matarratas', 'mrratas', 'Dirigido',  'Si', 'Puntos', 'No', '', '4:00')";
+                        consulta = "INSERT INTO `Aspiraciones` VALUES ('1','Personero','1','Representa al colegio'),"+
+                                                              "('2','Contralor','1','Se encarga del dinero'),"+
+                                                              "('3','Representante','1','Representa a los estudiantes')";
                         db.query(consulta).then(function(res){
-                            resolve2('Pruebas Insertadas');
+                            resolve2('Aspiraciones Insertadas');
+                        })
+                        
+                    }
+                })
+            })
+        })
+
+
+        .then(function(data){
+            return new Promise(function(resolve2, reject2) {
+                db.query('SELECT * FROM Votos').then(function(result){
+                
+                    if (result.length > 0) {
+                        resolve2('Votos ya estaban Insertadas');
+                    }else{
+                        
+                        consulta = "INSERT INTO `Votos` VALUES ('1','1','1','1',123),"+
+                                                              "('2','2','2','2',123),"+
+                                                              "('3','3','3','3',123)";
+                        db.query(consulta).then(function(res){
+                            resolve2('Votos Insertadas');
                         })
                         
                     }
@@ -79,8 +118,8 @@ function crearDatosIniciales() {
         })
         
         .then(function(data){
-            resolve('Agregados');
-        })
+            resolve(' Votaciones Agregadas');
+     })
         
 
         
@@ -91,4 +130,5 @@ function crearDatosIniciales() {
 
 
 module.exports = crearDatosIniciales;
+
 

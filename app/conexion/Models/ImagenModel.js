@@ -3,8 +3,8 @@ db      = require('../connWeb');
 
 
 let _default_female      = 'perfil/system/avatars/female1.png';
-let _default_male 	    = 'perfil/system/avatars/male1.png';
-let _perfil_path 		= 'perfil/';
+let _default_male       = 'perfil/system/avatars/male1.png';
+let _perfil_path        = 'perfil/';
 
 
 class ImagenModel {
@@ -21,7 +21,7 @@ class ImagenModel {
             if (imagen_id) {
 
             
-                consulta 	= `SELECT * FROM images WHERE id=? and deleted_at is null`;
+                consulta    = `SELECT * FROM images WHERE id=? and deleted_at is null`;
                 db.query(consulta, [imagen_id]).then(function (result) {
     
                     if( result.length > 0 ){
@@ -41,23 +41,23 @@ class ImagenModel {
     }
     
     
-	static default_image_id(sexo)
-	{
-		if (sexo == 'F') {
-			return 2;
-		}else{
-			return 1; // ID de la imagen masculina
-		}
-	}
+    static default_image_id(sexo)
+    {
+        if (sexo == 'F') {
+            return 2;
+        }else{
+            return 1; // ID de la imagen masculina
+        }
+    }
     
      static default_image_name(sexo)
-	{
-		if (sexo == 'F') {
-			return ImagenModel.default_female;
-		}else{
-			return ImagenModel.default_male;
-		}
-	}
+    {
+        if (sexo == 'F') {
+            return ImagenModel.default_female;
+        }else{
+            return ImagenModel.default_male;
+        }
+    }
 
 
     
