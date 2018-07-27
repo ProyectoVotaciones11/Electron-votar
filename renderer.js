@@ -91,7 +91,7 @@ self.io.on('connection', (socket)=> {
     
     for (let i = 0; i < all_clts.length; i++) {
 
-      if (all_clts[i].id == socket.id) {
+      if (all_clts[i].resourceId == socket.id) {
         all_clts.splice(i, 1);
       }
     }
@@ -104,6 +104,18 @@ self.io.on('connection', (socket)=> {
     console.log('Alguien escribió: Traer clientes');
     console.log(all_clts);
     self.io.sockets.emit('clientes_traidos', all_clts );
+  });
+
+
+  socket.on('toma_mis_datos', (data)=>{
+
+    for (let i = 0; i < all_clts.length; i++) {
+
+      if (all_clts[i].resourceId == socket.id) {
+        all_clts[i].user_data = data.usuario;
+      }
+    }
+    self.io.sockets.emit('me_recibieron_logueo' );
   });
 
 
