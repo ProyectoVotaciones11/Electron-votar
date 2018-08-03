@@ -88,6 +88,8 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('disconnect', (data)=>{
+
+  
     
     for (let i = 0; i < all_clts.length; i++) {
 
@@ -116,6 +118,14 @@ self.io.on('connection', (socket)=> {
       }
     }
     self.io.sockets.emit('me_recibieron_logueo' );
+  });
+
+   socket.on('Prueba', (data)=>{
+
+
+   console.log('sirve');
+   
+    self.io.sockets.emit('volvi' );
   });
 
 
