@@ -64,8 +64,12 @@ self.io.on('connection', (socket)=> {
 
     all_clts.push(socket.datos);
 
-    socket.emit('te_conectaste', {datos: socket.datos});
-    socket.broadcast.emit('conectado:alguien', {clt: socket.datos} );
+
+    setTimeout(function(){
+      socket.emit('te_conectaste', { datos: socket.datos });
+      socket.broadcast.emit('conectado:alguien', {clt: socket.datos} );
+    }, 1000);
+
 
   
   socket.on('mensaje', (data)=>{
@@ -128,6 +132,33 @@ self.io.on('connection', (socket)=> {
     self.io.sockets.emit('volvi' );
   });
 
+
+
+  socket.on('loguear', (data)=> {
+
+    datos           = {};
+    datos.logged      = true;
+    datos.registered    = data.registered?true:false;
+    datos.resourceId    = socket.id;
+    datos.nombre_punto    = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
+    datos.user_data     = data.usuario;
+    socket.datos      = datos;
+
+
+    //socket.join(socket.room);
+    
+    
+
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].resourceId == socket.id) {
+        all_clts.splice(i, 1, socket.datos);
+      }
+    }
+
+    socket.broadcast.emit('logueado:alguien', {clt: socket.datos} );
+
+    
+  });
 
 
 
