@@ -1,24 +1,52 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "electron-votar",
+  "version": "0.0.1",
+  "description": "Aplicación para trabajar las olimpiadas sin necesidad de internet ni engorrosas instalaciones",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build -p always",
+    "publish": "build --mac --win -p always",
+    "postinstall": "install-app-deps"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/ProyectoVotaciones11/Electron-votar.git",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Votaciones",
+    "wissen"
   ],
-  "author": "GitHub",
+  "author": "Kevin Eslava",
   "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^2.0.0",
-    "electron-reload": "^1.2.5"
+  "build": {
+    "appId": "votacionesSystem",
+    "mac": {
+      "category": "com.education.votaciones.system"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    }
   },
   "dependencies": {
     "express": "^4.16.3",
@@ -26,6 +54,16 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "ip": "^1.1.5",
-    "jsonwebtoken": "^8.2.1"
+    "jsonwebtoken": "^8.2.1",
+    "electron-is-dev": "^0.3.0",
+    "electron-log": "^2.2.16",
+    "electron-updater": "^3.0.3",
+    "node-excel-export": "^1.4.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "^6.0.5",
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.2",
+    "electron-reload": "^1.2.5"
   }
 }
