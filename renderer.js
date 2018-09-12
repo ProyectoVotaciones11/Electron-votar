@@ -39,6 +39,12 @@ var all_clts 		  = [];
 var info_evento 	= {};
 
 
+
+if (!process.env.NODE_PORT) {
+  process.env.NODE_PORT = 3000;
+}
+
+
 http.listen(process.env.NODE_PORT, function(){
   console.log('listening on *:'+process.env.NODE_PORT);
 });
