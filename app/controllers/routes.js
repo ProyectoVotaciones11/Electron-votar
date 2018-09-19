@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
-
+router.use('/configuraciones', require('./ConfigController'));
 router.use('/usuarios', require('./UsersController'));
 router.use('/candidatos', require('./CandController'));
 router.use('/votaciones', require('./VotacionController'));

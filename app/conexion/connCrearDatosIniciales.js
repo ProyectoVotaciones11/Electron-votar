@@ -108,9 +108,7 @@ function crearDatosIniciales() {
                         resolve2('Votos ya estaban Insertadas');
                     }else{
                         
-                        consulta = "INSERT INTO `Votos` VALUES ('1','1','1','1',123),"+
-                                                              "('2','2','2','2',123),"+
-                                                              "('3','3','3','3',123)";
+                        consulta = " ";
                         db.query(consulta).then(function(res){
                             resolve2('Votos Insertadas');
                         })
