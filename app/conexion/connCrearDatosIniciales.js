@@ -14,9 +14,9 @@ function crearDatosIniciales() {
                     hash_password   = '123';
                     consulta = "INSERT INTO `Participantes` VALUES ('1','Kevin Daniel', 'Eslava Barroso' , 'M', '11' , '1' , 'Kedaesva', '" + hash_password + "', 'Admin')," +
                                                                    "('2','Yeison Felmaber', 'Eslava Barroso', 'M', '11' , '1' , 'yextrun','" + hash_password + "', 'Participante')," +
-                                                                   "('3','keinny Zusette', 'Ferrer Quirife', 'F', '11' , '1' , 'Keinny', '" + hash_password + "', 'Participante')," +
+                                                                   "('3','keinny Suzette', 'Ferrer Quirife', 'F', '11' , '1' , 'Keinny', '" + hash_password + "', 'Admin')," +
                                                                    "('4','Angel Guillermo', 'Peñaredonda Silva', 'M', '11' , '1' , 'Memo', '" + hash_password + "', 'Participante')," +
-                                                                   "('5','Jhan Carlos','Ruda Prada','M', '11' , '1' , 'erik', '" + hash_password + "', 'Participante')," +
+                                                                   "('5','Jhan Carlos','Ruda Prada','M', '11' , '1' , 'Jhan', '" + hash_password + "', 'Admin')," +
                                                                    "('6','Leidy Paola',' Garcia Parra' ,'F', '11' , '1' , 'paola','" + hash_password + "', 'Participante')," +
                                                                    "('7','Martin Daniel','Rincon Molina', 'M', '11' , '1' , 'gandal', '" + hash_password + "', 'Participante')," +
                                                                    "('8','Juan Fernando','Eslava Vanegas', 'M', '11' , '1' , 'heraldo3',  '" + hash_password + "', 'Participante')" ; 
@@ -37,7 +37,7 @@ function crearDatosIniciales() {
                     }else{
                         
                        
-                        consulta        = "INSERT INTO `Candidatos` VALUES('1','keinny Zusette', 'Ferrer Quirife', 'F', '11' ,'images/users/2.jpg', 1), " +
+                        consulta        = "INSERT INTO `Candidatos` VALUES('1','keinny Suzette', 'Ferrer Quirife', 'F', '11' ,'images/users/2.jpg', 1), " +
                                                                   "('2','Kevin Daniel','Eslava Barroso','M','11','images/users/1.jpg','2'), " +
                                                                   "('3','Juan Fernando','Eslava Vanegas','M','11','images/users/4.jpg','3'), " +
                                                                   "('4','Jhan Carlos','Ruda Prada','M','11','images/users/5.jpg','1'), " +

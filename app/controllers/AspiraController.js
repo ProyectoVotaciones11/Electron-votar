@@ -30,10 +30,10 @@ function postRouteHandler(req, res) {
 
 function getEditarHandler(req, res) {
 
-	consulta = "UPDATE Aspiraciones  SET  id=? , aspiracion=? , descripcion=? WHERE rowid=?  ";
+	consulta = "UPDATE Aspiraciones  SET  id=? , aspiracion=? , descripcion=?, votacion_id=?  WHERE rowid=?  ";
 	params = req.query;
 
-	datos = [params.id, params.aspiracion, params.descripcion, params.rowid];     
+	datos = [params.id, params.aspiracion, params.descripcion, req.query.votacion_id, params.rowid];     
 	db.query(consulta, datos).then (function(result){
      
         res.send('Editado');
@@ -46,7 +46,7 @@ function getEditarHandler(req, res) {
 function getCambiarPassHandler(req, res) {
    consulta = "update  Aspiraciones set password=? where rowid=?";
 	
-	db.query(consulta, [ req.query.password, req.query.rowid]).then (function(result){
+	db.query(consulta, [ req.query.password,  req.query.rowid ]).then (function(result){
 		res.send('Cambiado');
 	}, function(error){
 		
