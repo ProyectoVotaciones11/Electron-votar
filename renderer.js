@@ -119,9 +119,21 @@ self.io.on('connection', (socket)=> {
 
   socket.on('traer_cliente', (data)=>{
 
-    datos = socket.id ;
     
-    self.io.sockets.emit('cliente_traido', datos );
+
+    for (let i = 0; i < all_clts.length; i++) {
+
+      if (all_clts[i].resourceId == data.id) {
+
+       data.mensh = "hola"
+
+        self.io.sockets.emit('cliente_traido', data.mensh );
+        
+      }
+    }
+   
+    
+
   });
 
   socket.on('Cerrar_sesion', (data)=>{
