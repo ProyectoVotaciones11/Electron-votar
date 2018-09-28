@@ -113,9 +113,24 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('traer_clientes', (data)=>{
-    console.log('Alguien escribió: Traer clientes');
-    console.log(all_clts);
+    
     self.io.sockets.emit('clientes_traidos', all_clts );
+  });
+
+  socket.on('traer_cliente', (data)=>{
+
+    datos = socket.id ;
+    
+    self.io.sockets.emit('cliente_traido', datos );
+  });
+
+  socket.on('Cerrar_sesion', (data)=>{
+
+    
+   socket.broadcast.emit('Secion_cerrada', data.id);
+
+
+
   });
 
 
@@ -133,7 +148,6 @@ self.io.on('connection', (socket)=> {
    socket.on('Prueba', (data)=>{
 
 
-   console.log('sirve');
    
     self.io.sockets.emit('volvi' );
   });
