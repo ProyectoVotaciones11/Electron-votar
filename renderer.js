@@ -119,15 +119,17 @@ self.io.on('connection', (socket)=> {
 
   socket.on('traer_cliente', (data)=>{
 
-    
+    console.log(data);
 
     for (let i = 0; i < all_clts.length; i++) {
 
-      if (all_clts[i].resourceId == data.id) {
+      
 
-       data.mensh = "hola"
+      if (all_clts[i].resourceId == data.id.resourceId) {
 
-        self.io.sockets.emit('cliente_traido', data.mensh );
+          console.log( all_clts[i].resourceId );
+
+        self.io.to( all_clts[i].resourceId  ).emit('cliente_traido', data.id );
         
       }
     }
