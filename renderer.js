@@ -119,7 +119,7 @@ self.io.on('connection', (socket)=> {
 
   socket.on('traer_cliente', (data)=>{
 
-    console.log(data);
+   
 
     for (let i = 0; i < all_clts.length; i++) {
 
@@ -127,7 +127,7 @@ self.io.on('connection', (socket)=> {
 
       if (all_clts[i].resourceId == data.id.resourceId) {
 
-          console.log( all_clts[i].resourceId );
+        
 
         self.io.to( all_clts[i].resourceId  ).emit('cliente_traido', data.id );
         
@@ -142,6 +142,26 @@ self.io.on('connection', (socket)=> {
 
     
    socket.broadcast.emit('Secion_cerrada', data.id);
+
+
+
+  });
+
+   socket.on('mis_datos', (data)=>{
+
+  
+    for (let i = 0; i < all_clts.length; i++) {
+
+      
+
+      if (all_clts[i].resourceId == socket.id) {
+
+       
+
+         self.io.sockets.emit('toma_datos', all_clts[i]);
+        
+      }
+    }
 
 
 

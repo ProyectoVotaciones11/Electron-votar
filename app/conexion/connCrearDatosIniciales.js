@@ -17,8 +17,8 @@ function crearDatosIniciales() {
                                                                    "('3','keinny Suzette', 'Ferrer Quirife', 'F', '11' , '1' , 'Keinny', '" + hash_password + "', 'Admin')," +
                                                                    "('4','Angel Guillermo', 'Peñaredonda Silva', 'M', '11' , '1' , 'Memo', '" + hash_password + "', 'Participante')," +
                                                                    "('5','Jhan Carlos','Ruda Prada','M', '11' , '1' , 'Jhan', '" + hash_password + "', 'Admin')," +
-                                                                   "('6','Leidy Paola',' Garcia Parra' ,'F', '11' , '1' , 'paola','" + hash_password + "', 'Participante')," +
-                                                                   "('7','Martin Daniel','Rincon Molina', 'M', '11' , '1' , 'gandal', '" + hash_password + "', 'Participante')," +
+                                                                   "('6','Leidy Paola',' Garcia Parra' ,'F', '11' , '1' , 'paola','" + hash_password + "', 'Cuidador')," +
+                                                                   "('7','Martin Daniel','Rincon Molina', 'M', '11' , '1' , 'gandal', '" + hash_password + "', 'Cuidador')," +
                                                                    "('8','Juan Fernando','Eslava Vanegas', 'M', '11' , '1' , 'heraldo3',  '" + hash_password + "', 'Participante')" ; 
                                                              
                     db.query(consulta).then(function(res){
