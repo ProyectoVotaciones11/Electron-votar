@@ -54,7 +54,6 @@ http.listen(process.env.NODE_PORT, function(){
 
 
 self.io.on('connection', (socket)=> {
-    console.log('New connection: '+socket.id);
 
     count_clients++;
 
@@ -69,6 +68,9 @@ self.io.on('connection', (socket)=> {
     socket.datos 			= datos;
 
     all_clts.push(socket.datos);
+
+
+    console.log('New connection: ', socket.id);
 
 
     setTimeout(function(){
@@ -152,13 +154,9 @@ self.io.on('connection', (socket)=> {
   
     for (let i = 0; i < all_clts.length; i++) {
 
-      
-
       if (all_clts[i].resourceId == socket.id) {
 
-       
-
-         self.io.sockets.emit('toma_datos', all_clts[i]);
+         self.io.to( all_clts[i].resourceId).emit('toma_datos', all_clts[i]);
         
       }
     }

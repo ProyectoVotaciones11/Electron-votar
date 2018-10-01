@@ -26,7 +26,7 @@ class User {
 
 
                     let user = result[0];
-
+                    console.log(user);
                   
                     let compatible = User.comparar(user_data.password, user.Password);
 
