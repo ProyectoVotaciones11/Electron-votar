@@ -132,11 +132,32 @@ self.io.on('connection', (socket)=> {
         
 
         self.io.to( all_clts[i].resourceId  ).emit('cliente_traido', data.id );
+
+        
         
       }
     }
    
     
+
+  });
+
+   socket.on('Enviar_cuidador', (data)=>{   
+
+    for (let i = 0; i < all_clts.length; i++) {      
+
+      if (all_clts[i].resourceId == data.id.resourceId) {
+
+        self.io.to( all_clts[i].resourceId  ).emit('Cuidador_enviado', data.id );
+        
+      }
+    }
+
+  });
+
+   socket.on('Enviar_voto', (data)=>{   
+
+        socket.broadcast.emit('Voto_enviado');
 
   });
 
@@ -160,8 +181,6 @@ self.io.on('connection', (socket)=> {
         
       }
     }
-
-
 
   });
 
