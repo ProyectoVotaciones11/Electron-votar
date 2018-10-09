@@ -34,11 +34,17 @@ class User {
 
                     if (! compatible) reject('invalid_password');
 
-                        let token               = jwt.sign({ rowid: user.rowid }, process.env.JWT_SECRET);
-                        user.remember_token     = token;
-                        delete user.Password;
+                    let token               = jwt.sign({ rowid: user.rowid }, process.env.JWT_SECRET);
+                    user.remember_token     = token;
+                    delete user.Password;
+
+                    db.query('SELECT *, rowid FROM Votos WHERE Participante_id=?' , [user.rowid]).then(function(votos){
+                        user.votos = votos;
 
                         resolve(user);
+                    });
+
+
                 }else{
                     reject('invalid_username')
                     
