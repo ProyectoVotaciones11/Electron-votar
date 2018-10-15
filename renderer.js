@@ -191,6 +191,7 @@ self.io.on('connection', (socket)=> {
   
   socket.on('loguear', (data)=> {
 
+
     datos           = {};
     datos.logged      = true;
     datos.registered    = data.registered?true:false;
