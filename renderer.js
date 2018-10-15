@@ -101,8 +101,7 @@ self.io.on('connection', (socket)=> {
   
   socket.on('disconnect', (data)=>{
 
-  
-    
+
     for (let i = 0; i < all_clts.length; i++) {
 
       if (all_clts[i].resourceId == socket.id) {
@@ -126,19 +125,13 @@ self.io.on('connection', (socket)=> {
     for (let i = 0; i < all_clts.length; i++) {
 
       
+      if (all_clts[i].resourceId == data.id.resourceId) {      
 
-      if (all_clts[i].resourceId == data.id.resourceId) {
-
-        
-
-        self.io.to( all_clts[i].resourceId  ).emit('cliente_traido', data.id );
-
-        
+        self.io.to( all_clts[i].resourceId  ).emit('cliente_traido', data.id );    
         
       }
     }
-   
-    
+       
 
   });
 
@@ -165,7 +158,6 @@ self.io.on('connection', (socket)=> {
 
     
    socket.broadcast.emit('Secion_cerrada', data.id);
-
 
 
   });
@@ -196,15 +188,7 @@ self.io.on('connection', (socket)=> {
     self.io.sockets.emit('me_recibieron_logueo' );
   });
 
-   socket.on('Prueba', (data)=>{
-
-
-   
-    self.io.sockets.emit('volvi' );
-  });
-
-
-
+  
   socket.on('loguear', (data)=> {
 
     datos           = {};
@@ -231,6 +215,12 @@ self.io.on('connection', (socket)=> {
     
   });
 
+    socket.on('me_desconecte', (data)=>{
+
+      console.log(socket);
+   
+    self.io.sockets.emit('Alguien_desconect',  );
+  });
 
 
 });
