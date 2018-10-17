@@ -10,6 +10,7 @@ router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/cambiar-pass').get(getCambiarPassHandler);
+router.route('/Subir_Datos').get(getSubirPassHandler);
 
 
 function getRouteHandler(req, res) {
@@ -69,6 +70,38 @@ function getInsertarHandler(req, res) {
 };
 
 function deleteUsuarioHandler(req, res) {
+    
+	consulta = "DELETE FROM Participantes WHERE rowid = ? ";
+	db.query(consulta, [req.query.id]).then (function(result){
+		res.send('Eliminado');
+	}, function(error){
+		
+		res.status(400).send({ error: error })
+	})
+}
+
+function getSubirPassHandler(req, res) {
+
+	console.log(req.query);
+
+
+	for (var i = 0; i < grupos.length; i++) {
+                 console.log(grupos[i].alumnos);
+
+		for (var j = 0; j < grupos[j].alumnos.length; j++) {
+		 alumno = grupos[i].alumnos[j];
+
+		 consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
+		 db.query(consulta, [req.query.id]).then (function(result){
+			res.send('Eliminado');
+		}, function(error){
+			
+			res.status(400).send({ error: error })
+		})
+
+         }
+    }
+
     
 	consulta = "DELETE FROM Participantes WHERE rowid = ? ";
 	db.query(consulta, [req.query.id]).then (function(result){
