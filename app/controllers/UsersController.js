@@ -10,24 +10,50 @@ router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/cambiar-pass').get(getCambiarPassHandler);
-router.route('/Subir_Datos').get(getSubirPassHandler);
+router.route('/subir-datos').put(putSubirPassHandler);
+router.route('/participantes-por-grupo').put(putParticipantesPorGruposHandler);
 
 
 function getRouteHandler(req, res) {
 
 	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid";
 	db.query(consulta).then(function(result){
-        Participantes = result ;
-    	res.json(Participantes);	
+        respuesta = {};
+        respuesta.participantes = result ;
+
+
+		consulta = "SELECT DISTINCT Grupo_id from Participantes";
+		
+		db.query(consulta).then (function(resultG){
+
+			respuesta.grupos = resultG ;
+	    	res.json(respuesta);	
+	    }, function(error){
+			console.log(error);
+		})
 
     }, function(error){
-		
+		console.log(error);		
 	})
 
 }
 
 function postRouteHandler(req, res) {
     //handle POST route here
+}
+function putParticipantesPorGruposHandler(req, res) {
+
+	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid WHERE Grupo_id=?";
+	
+	db.query(consulta, [req.body.Grupo_id]).then (function(result){
+
+		console.log(result)
+     
+        res.send(result);
+	}, function(error){
+      
+       res.status(400).send({ error: error })
+	})
 }
 
 function getEditarHandler(req, res) {
@@ -80,36 +106,41 @@ function deleteUsuarioHandler(req, res) {
 	})
 }
 
-function getSubirPassHandler(req, res) {
+function putSubirPassHandler(req, res) {
 
-	console.log(req.query);
+	axios = require('axios');
+
+	colegio = req.body.sitio; 
+
+	axios.get(colegio + '/5myvc/public/asistencias/datos-solo-alumnos', { year_id: 4 }).then(function (data) {
+	    let grupos = data.data.grupos;
+       
 
 
-	for (var i = 0; i < grupos.length; i++) {
-                 console.log(grupos[i].alumnos);
-
-		for (var j = 0; j < grupos[j].alumnos.length; j++) {
-		 alumno = grupos[i].alumnos[j];
-
-		 consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
-		 db.query(consulta, [req.query.id]).then (function(result){
-			res.send('Eliminado');
-		}, function(error){
+		for (var i = 0; i < grupos.length; i++) {
 			
-			res.status(400).send({ error: error })
-		})
 
-         }
-    }
+			for (var j = 0; j < grupos[i].alumnos.length; j++) {
+				alumno = grupos[i].alumnos[j];
+				console.log(grupos[i].alumnos[j]);
+				
+				consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
+				db.query(consulta, [alumno.nombres, alumno.apellidos, alumno.username, '123', alumno.sexo, grupos[i].abrev, '1', 'Participante']).then (function(result){
+					res.send('Insertado');
+				}, function(error){
+					
+					res.status(400).send({ error: error })
+				})
+				
 
-    
-	consulta = "DELETE FROM Participantes WHERE rowid = ? ";
-	db.query(consulta, [req.query.id]).then (function(result){
-		res.send('Eliminado');
-	}, function(error){
-		
-		res.status(400).send({ error: error })
-	})
+	         }
+	    }
+
+	}).catch(function (error) {
+	    console.log(error);
+	});
+
+
 }
                   
 module.exports = router;

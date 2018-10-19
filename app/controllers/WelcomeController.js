@@ -52,6 +52,7 @@ function postRouteHandler(req, res) {
 
 function getCrearTablas(req, res) {
     crear = require('../conexion/connCrearTablas')();
+    require('../conexion/connCrearDatosIniciales')();
     res.send('Tablas Creadas');
 }
 

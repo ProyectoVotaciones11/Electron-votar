@@ -25,11 +25,7 @@
     <h3> Este es el servidor para una red local. Si lo cierra, los clientes ya no podrán funcionar.
  </h3>
     
-    
-    <input type="button" onclick="crearTablas()" value="Crear tablas">
-    <br>
-    
-    <input type="button" onclick="crearDatosIniciales()" value="Crear datos iniciales">
+ 
     
     <br>
     <br>
@@ -74,8 +70,12 @@
         
         
         crearTablas = function () {
+          console.log('crearTablas');
           const {shell} = require('electron');
+
+          console.log(shell);
           shell.openExternal('http://' + ip + ':3000/api/welcome/crear-tablas');
+          console.log('finnnn');
         }
         
         crearDatosIniciales = function () {
@@ -84,8 +84,11 @@
         }
       
         abrirAppEnNavegador = function () {
+          console.log('abrirAppEnNavegador');
           const {shell} = require('electron');
+
           shell.openExternal('http://' + ip + ':3000');
+
         }
       
         

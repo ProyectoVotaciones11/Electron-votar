@@ -1,12 +1,13 @@
 {
   "name": "electron-votar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Aplicación para trabajar las olimpiadas sin necesidad de internet ni engorrosas instalaciones",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "build --dir",
     "dist": "build -p always",
+    "never": "build -p never",
     "publish": "build --mac --win -p always",
     "postinstall": "install-app-deps"
   },
@@ -49,16 +50,17 @@
     }
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "socket.io": "^2.1.1",
+    "axios": "^0.18.0",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
-    "ip": "^1.1.5",
-    "jsonwebtoken": "^8.2.1",
     "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.16",
     "electron-updater": "^3.0.3",
-    "node-excel-export": "^1.4.4"
+    "express": "^4.16.3",
+    "ip": "^1.1.5",
+    "jsonwebtoken": "^8.2.1",
+    "node-excel-export": "^1.4.4",
+    "socket.io": "^2.1.1"
   },
   "devDependencies": {
     "@angular/cli": "^6.0.5",

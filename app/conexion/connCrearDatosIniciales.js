@@ -12,14 +12,7 @@ function crearDatosIniciales() {
                     resolve2('Participantes ya estaban Insertados');
                 }else{
                     hash_password   = '123';
-                    consulta = "INSERT INTO `Participantes` VALUES ('1','Kevin Daniel', 'Eslava Barroso' , 'M', '11' , '1' , 'Kedaesva', '" + hash_password + "', 'Admin')," +
-                                                                   "('2','Yeison Felmaber', 'Eslava Barroso', 'M', '11' , '1' , 'yextrun','" + hash_password + "', 'Participante')," +
-                                                                   "('3','keinny Suzette', 'Ferrer Quirife', 'F', '11' , '1' , 'Keinny', '" + hash_password + "', 'Admin')," +
-                                                                   "('4','Angel Guillermo', 'Peñaredonda Silva', 'M', '11' , '1' , 'Memo', '" + hash_password + "', 'Participante')," +
-                                                                   "('5','Jhan Carlos','Ruda Prada','M', '11' , '1' , 'Jhan', '" + hash_password + "', 'Admin')," +
-                                                                   "('6','Leidy Paola',' Garcia Parra' ,'F', '11' , '1' , 'paola','" + hash_password + "', 'Cuidador')," +
-                                                                   "('7','Martin Daniel','Rincon Molina', 'M', '11' , '1' , 'gandal', '" + hash_password + "', 'Cuidador')," +
-                                                                   "('8','Juan Fernando','Eslava Vanegas', 'M', '11' , '1' , 'heraldo3',  '" + hash_password + "', 'Participante')" ; 
+                    consulta = "INSERT INTO `Participantes` VALUES ('1','Admin', 'Local' , 'M', '0' , '1' , 'kedaesva', '" + hash_password + "', 'Admin')"; 
                                                              
                     db.query(consulta).then(function(res){
                         resolve2('Participantes Insertados');
@@ -99,24 +92,6 @@ function crearDatosIniciales() {
             })
         })
 
-
-        .then(function(data){
-            return new Promise(function(resolve2, reject2) {
-                db.query('SELECT * FROM Votos').then(function(result){
-                
-                    if (result.length > 0) {
-                        resolve2('Votos ya estaban Insertadas');
-                    }else{
-                        
-                        consulta = " ";
-                        db.query(consulta).then(function(res){
-                            resolve2('Votos Insertadas');
-                        })
-                        
-                    }
-                })
-            })
-        })
         
         .then(function(data){
             resolve(' Votaciones Agregadas');
