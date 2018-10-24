@@ -149,9 +149,17 @@ self.io.on('connection', (socket)=> {
   });
 
    socket.on('Enviar_voto', (data)=>{   
+    
+      for (let i = 0; i < all_clts.length; i++) {
 
-        socket.broadcast.emit('Voto_enviado');
+        if (all_clts[i].resourceId == socket.id) {
+          all_clts[i].votando_aspiracion_id = data.id;
 
+          console.log(all_clts[i].votando_aspiracion_id);
+
+           socket.broadcast.emit('participante_en_aspiracion', data);
+        }
+      }
   });
 
   socket.on('Cerrar_sesion', (data)=>{
