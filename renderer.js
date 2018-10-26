@@ -154,10 +154,9 @@ self.io.on('connection', (socket)=> {
 
         if (all_clts[i].resourceId == socket.id) {
           all_clts[i].votando_aspiracion_id = data.id;
+          all_clts.splice(i, 1, all_clts[i]);
 
-          console.log(all_clts[i].votando_aspiracion_id);
-
-           socket.broadcast.emit('participante_en_aspiracion', data);
+          socket.broadcast.emit('participante_en_aspiracion', data);
         }
       }
   });
@@ -204,10 +203,11 @@ self.io.on('connection', (socket)=> {
     datos.logged      = true;
     datos.registered    = data.registered?true:false;
     datos.resourceId    = socket.id;
+    datos.votando_aspiracion_id		= 0;
     datos.nombre_punto    = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
     datos.user_data     = data.usuario;
     socket.datos      = datos;
-
+    
 
     //socket.join(socket.room);
     
@@ -218,7 +218,7 @@ self.io.on('connection', (socket)=> {
         all_clts.splice(i, 1, socket.datos);
       }
     }
-
+    socket.emit('te_logueaste');
     socket.broadcast.emit('logueado:alguien', {clt: socket.datos} );
 
     

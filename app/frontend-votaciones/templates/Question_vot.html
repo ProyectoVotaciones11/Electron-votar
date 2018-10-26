@@ -1,0 +1,26 @@
+<div class="modal-header">
+	    <h3 class="modal-title" id="modal-title"> 	<b>Estas seguro que quieres votar por:  </b>
+	</div>
+
+	
+
+		<div class="modal-body" id="modal-body">
+			
+		<h2>
+			<p class="text-center text-md"> {{candidato.Nombres}} {{candidato.Apellidos}}</p>
+		</h2>	
+
+			<img class="foto-candidato img img-thumbnail"src="{{candidato.Foto}}">
+			
+		</div>
+
+	<div class="modal-footer">
+
+	    
+		<button class="btn btn-success btn-md btn-block " ng-click="ok()">SI</button>
+
+		<button class="btn btn-danger btn-md btn-block" ng-click="no()">NO</button>
+
+
+</div>
+

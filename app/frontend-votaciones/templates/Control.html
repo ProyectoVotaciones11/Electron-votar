@@ -1,0 +1,55 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Control</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Control</li>
+        </ol>
+    </div>
+    
+</div>
+
+<div class="row">
+
+  <div class="col-md-12">
+      
+    <div class="card" >
+         
+        <div class="card-block">
+            
+            <div class="row">
+
+                   <div class="col-sm-12"> 
+                      <button type="button" class="btn btn-default" ng-click="traer_clientes()" uib-tooltip="Actualizar clientes">
+                        <i class="mdi mdi-cached"></i>
+                      </button>
+                
+                  </div>
+            </div>
+
+
+            <div class="row" class="col-sm-12">
+
+                   <div class="col-sm-10"> 
+
+                    <span  class="card col-sm-4" ng-repeat="punto in puntos" 
+                          ng-click="Ver_Usuario(punto)">
+                          
+                        <span class="card-block" >
+                          
+                          <div class="text-center"><strong>{{punto.nombre_punto}}</strong></div>
+                          <div>{{punto.user_data.Nombres}} {{punto.user_data.Apellidos}}</div>
+                         
+
+                        </span>
+
+                    </span>
+
+                  </div>
+            </div>
+        </div>
+      </div>       
+          
+    </div>
+    
+</div>      

@@ -1,0 +1,63 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Votaciones</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Votaciones</li>
+        </ol>
+    </div>
+    
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <div class="card" style="overflow: auto;">
+            
+        
+                    
+                <div class="card-block">
+                    
+                    <div class="row">
+
+	                         <div class="col-sm-12">
+
+                                        
+                                      <div class="" ng-repeat="Aspi in Aspiraciones">
+
+                                      	<h1>{{Aspi.aspiracion}}</h1>
+
+
+                                        <div ng-repeat="candidato in Aspi.Candidatos" style="padding: 5px; border-bottom: 1px solid #ccc;" >
+                                          
+                                          
+                                                <img src="{{candidato.Foto }}" class=" img img-circle" style="width: 50px;display: inline-block;" >
+                                                
+                                                <span class=" datos-candidato"  style="display: inline-block;">{{candidato.Nombres}} {{candidato.Apellidos}}</span>
+
+                                                <span>Votos: 
+                                                	<span>{{candidato.cantidad}}</span>
+                                                </span>
+
+                                           </div>
+
+                                      </div>
+                                    </div>
+
+                      </div>
+                  </div>
+
+                                
+                    
+             </div>       
+              
+        </div>
+        
+    </div>      
+
+
+
+
+
+     

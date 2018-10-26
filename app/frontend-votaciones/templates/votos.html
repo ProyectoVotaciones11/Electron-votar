@@ -1,0 +1,227 @@
+
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Votos</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Votos</li>
+        </ol>
+    </div>
+    
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <div class="card" style="overflow: auto;">
+            
+           
+                    
+                    <div class="card-block">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                            <div class="table-responsive">
+
+                                              <h4 class="card-title"> Tabla de Votos</h4>
+
+                                                <table class="table table-striped table-hover table-condensed">
+                                                        <thead>
+                                                           <tr>
+                                                                <th >#</th>
+                                                                <th style="min-width: 60px;">Participantes</th>
+                                                                <th style="min-width: 60px;">Candidato</th>
+                                                                <th style="min-width: 60px;">Aspiracion</th>
+                                                                <th style="min-width: 60px;">Fecha/Hora</th>
+                                                                <th style="min-width: 60px;">////</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            <tr ng-repeat="vot in Votos">
+
+                                                                <!--Tabla Votos-->
+
+                                                                <td>
+                                                                    {{$index + 1}}
+                                                                </td>
+
+                                                                <td ng-show="!vot.Mostrar_Votos" >
+                                                                    {{vot.Participantes_Nombres +' '+vot.Participantes_Apellidos}}
+                                                                </td>
+
+                                                                <td ng-show="!vot.Mostrar_Votos">
+                                                                    {{vot.Nombres +' '+vot.Apellidos}}
+                                                                </td>
+
+                                                                <td ng-show="!vot.Mostrar_Votos">
+                                                                    {{vot.aspiracion}}
+                                                                </td>
+
+                                                                <td ng-show="!vot.Mostrar_Votos">
+                                                                    {{vot.fecha_hora}}
+                                                                </td>
+
+                                                                <td ng-show="!vot.Mostrar_Votos">
+
+                                                                    
+                                                                    <button class="btn waves-effect waves-light btn-danger btn-sm" ng-click=" Delete_Votos(vot)"uib-tooltip="Eliminar">
+                                                                <i class="mdi mdi-window-close"></i>
+
+                                                                </td> 
+
+                                                                <!--Tabla de editar Votos
+
+                                                                   <td ng-show="vot.Mostrar_Votos" >
+                                                                        
+                                                                            <div class="col-sm-4 form-control text-pequenio2" >
+                                                                                    
+                                                                                 <select ng-model="vot.Participantes_id"  >
+                                                                                    <option ng-repeat="Parti in Participantes" value="{{Parti.rowid}}">
+                                                                                     {{Parti.Nombres +''+ Parti.Apellidos}}
+                                                                                    </option>
+                                                                                </select>
+
+                                                                            </div>
+
+                                                                    </td>
+
+                                                                    <td ng-show="vot.Mostrar_Votos" >
+                                                                        
+                                                                    <div class="col-sm-4 form-control text-pequenio2" >
+                                                                        
+                                                                        <select ng-model="vot.candidato_id"  >
+                                                                              <option ng-repeat="Candi in Candidatos" value="{{Candi.rowid}}">
+                                                                              {{Candi.Nombres +''+ Candi.Apellidos}}
+                                                                              </option>
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                    </td>
+
+                                                                    <td ng-show="vot.Mostrar_Votos" >
+                                                                        
+                                                                    <div class="col-sm-4 form-control text-pequenio2" >
+                                                                        
+                                                                        <select ng-model="vot.aspiracion_id"  >
+                                                                              <option ng-repeat="aspi in Aspiraciones" value="{{aspi.rowid}}">
+                                                                              {{aspi.aspiracion}}
+                                                                              </option>
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                    </td>
+
+                                                                    <td ng-show="vot.Mostrar_Votos">
+                                                                        <input class="text-pequenio" type="text" ng-model="vot.fecha_hora" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="vot.Mostrar_Votos">
+
+                                                                        <button class="btn waves-effect waves-light btn-info " ng-click="Modificar_Votos(vot)"
+                                                                        >Guardar</button>
+                                                                        <button class="btn waves-effect waves-light btn-danger " ng-click="Ocultar_Tabla_de_Editar(vot)"
+                                                                        >Cancelar</button>
+
+                                                                    </td>  -->
+
+                                                            <!--Tabla de Crear Votos
+                                                               
+                                                            <tr ng-show="Mostrar_tabla_crear" >
+
+                                                                <td>
+                                                                     #  
+                                                                </td>
+
+                                                               <td  >
+                                                                        
+                                                                   <div class="col-sm-4 form-control text-pequenio2" >
+                                                                                
+                                                                        <select ng-model="Votos_nuevo.Participantes_id"  >
+                                                                           <option ng-repeat="Parti in Participantes" value="{{Parti.rowid}}">
+                                                                                {{Parti.Nombres +''+ Parti.Apellidos}}
+                                                                           </option>
+                                                                       </select>
+
+                                                                   </div>
+
+                                                                    </td>
+
+                                                                <td >
+                                                                        
+                                                                    <div class="col-sm-4 form-control text-pequenio2" >
+                                                                        
+                                                                        <select ng-model="Votos_nuevo.candidato_id"  >
+                                                                              <option ng-repeat="Candi in Candidatos" value="{{Candi.rowid}}">
+                                                                              {{Candi.Nombres +''+ Candi.Apellidos}}
+                                                                              </option>
+                                                                        </select>
+
+                                                                    </div>
+
+                                                                </td>
+
+                                                                <td>  
+
+                                                                <div class="col-sm-4 form-control text-pequenio2" >
+                                                                        
+                                                                    <select ng-model="Votos_nuevo.aspiracion_id"  >
+                                                                          <option ng-repeat="aspi in Aspiraciones" value="{{aspi.rowid}}">
+                                                                          {{aspi.aspiracion}}
+                                                                          </option>
+                                                                    </select>
+
+                                                                </div>  
+
+                                                               </td>
+
+                                                                <td > 
+                                                                  <input class="text-pequenio" type="text" ng-value="fecha_hora" ng-model="Votos_nuevo.fecha_hora" name=""> 
+                                                                </td>
+
+                                                                <td >
+
+                                                                  <button class="btn waves-effect waves-light btn-info " ng-click="Insert_Votos(Votos_nuevo)"
+                                                                  >Crear</button>
+                                                                  <button class="btn waves-effect waves-light btn-danger " ng-click="Ocultar_Candidato()"
+                                                                  >Cancelar</button>
+                                                                    
+                                                                 </td>
+
+                                                           </tr>
+                                                            
+                                                        </tr> 
+                                                                                                  
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                     <!-- Column -->
+                                       
+                                        
+                                </div>
+                         
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+               
+
+        </div>
+    </div>
+</div>

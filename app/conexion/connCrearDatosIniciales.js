@@ -12,7 +12,7 @@ function crearDatosIniciales() {
                     resolve2('Participantes ya estaban Insertados');
                 }else{
                     hash_password   = '123';
-                    consulta = "INSERT INTO `Participantes` VALUES ('1','Admin', 'Local' , 'M', '0' , '1' , 'kedaesva', '" + hash_password + "', 'Admin')"; 
+                    consulta = "INSERT INTO `Participantes` VALUES ('1','Joseth', 'Local' , 'M', '0' , '1' , 'Admin', '" + hash_password + "', 'Admin')"; 
                                                              
                     db.query(consulta).then(function(res){
                         resolve2('Participantes Insertados');

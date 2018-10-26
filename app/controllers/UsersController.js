@@ -116,25 +116,29 @@ function putSubirPassHandler(req, res) {
 	    let grupos = data.data.grupos;
        
 
-
+		promesas = [];
+		
 		for (var i = 0; i < grupos.length; i++) {
+				
 			
-
 			for (var j = 0; j < grupos[i].alumnos.length; j++) {
 				alumno = grupos[i].alumnos[j];
 				console.log(grupos[i].alumnos[j]);
 				
 				consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
-				db.query(consulta, [alumno.nombres, alumno.apellidos, alumno.username, '123', alumno.sexo, grupos[i].abrev, '1', 'Participante']).then (function(result){
-					res.send('Insertado');
-				}, function(error){
-					
-					res.status(400).send({ error: error })
-				})
+				prome = db.query(consulta, [alumno.nombres, alumno.apellidos, alumno.username, '123', alumno.sexo, grupos[i].abrev, '1', 'Participante']);
 				
-
-	         }
-	    }
+				promesas.push(prome);
+				
+			}
+		}
+		
+		Promise.all(promesas).then(function(result){
+			res.send('Insertados');
+		}, function(error){
+			res.status(400).send({ error: error })
+		})
+		
 
 	}).catch(function (error) {
 	    console.log(error);

@@ -1,0 +1,69 @@
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            <form ng-submit="entrar(user)" class="login100-form validate-form flex-sb flex-w">
+
+                  <span class="login100-form-title p-b-15" >
+                  {{punto}}
+                </span>
+                
+
+                <span class="login100-form-title p-b-51" >
+                  votaciones escolares
+                </span>
+
+
+              
+
+                
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
+                    <input class="input100 form-control" type="text" ng-model="user.username" placeholder="Usuario" uib-tooltip="Ingresa tu usuario">
+                    <span class="focus-input100"></span>
+                </div>
+                
+                
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+                    <input class="input100 form-control" type="password" ng-model="user.password" placeholder="Contraseña" uib-tooltip="Ingresa tu contraseña">
+                    <span class="focus-input100"></span>
+                </div>
+                
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                       
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" type="submit">
+                        Entrar
+                    </button>
+                </div>
+
+
+            </form>
+
+            <form ng-submit="cambiar_servidor(servidor)" style="margin-top: 100px">
+              
+                  <div class="form-group ">
+                    <a href="" ng-click="mostrarCambiarServ()">Cambiar servidor</a>
+                  </div>
+
+                  <div class="form-group " ng-show="mostrar_cambiar_serv">
+                    <input type="text" class="input100 form-control" placeholder="Contraseña" ng-model="servidor" >
+                    <span ></span>
+                    <input type="submit" class="btn btn-primary" name="" class="btn btn-primary" value="Guardar">
+                    <hr>
+                    <a href="http://{{servidor}}:3000/api/welcome/crear-tablas" target="_blank">Crear tablas</a>
+                  </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+    

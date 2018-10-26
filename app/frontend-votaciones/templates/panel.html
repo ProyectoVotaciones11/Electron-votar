@@ -1,0 +1,131 @@
+ <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" >
+                        <!-- Logo icon -->
+                        <b>
+
+                            <img src="images/logo-light-icon.png"  class="light-logo" >
+                        </b>
+
+                        <!--End Logo icon -->   
+                       
+                </div>
+
+                <div class="navbar-header">
+                    <span> 
+                        <img src="images/logo-light-text.png" class="light-logo">
+                    </span>
+                </div>
+
+                <!-- End Logo -->
+                <div class="navbar-collapse">
+                    <!-- toggle and nav items -->
+                    <ul class="navbar-nav mr-auto ">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"></a> </li>
+                        
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- Profile -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/1.jpg" alt="user" class="profile-pic m-r-10" />{{ USER.Nombres }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- End Topbar header -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li > <a  ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Inicio</span></a>
+                        </li>
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.Votaciones" aria-expanded="false"><i class="mdi mdi-human-male-female"></i><span class="hide-menu">Votaciones</span></a>
+                        </li>
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.candidatos" aria-expanded="false"><i class="mdi  mdi-owl"></i><span class="hide-menu">Candidatos</span></a>
+                        </li>
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.Aspiraciones" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu">Aspiraciones</span></a>
+                        </li>
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.Votos" aria-expanded="false"><i class="mdi mdi-thumbs-up-down"></i><span class="hide-menu">Votos</span></a>
+                        </li>
+                        <li> <a ng-show="Cuidador" class="waves-effect waves-dark" ui-sref="panel.Participantes" aria-expanded="false"><i class="mdi  mdi-cat"></i><span class="hide-menu">Participantes</span></a>
+                        </li>
+                        <li> <a  ng-show="Participante" class="waves-effect waves-dark" ui-sref="panel.Votar" aria-expanded="false"><i class=" mdi mdi-bank "></i><span class="hide-menu">Votar</span></a>
+                        </li>
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.Resultados" aria-expanded="false"><i class=" mdi mdi-fish "></i><span class="hide-menu">Resultados</span></a>
+                        </li>
+
+                        <li> <a ng-show="Cuidador" class="waves-effect waves-dark" ui-sref="panel.Control" aria-expanded="false"><i class=" mdi mdi-web"></i><span class="hide-menu">Control</span></a>
+                        </li>
+
+                        <li> <a ng-show="Admin" class="waves-effect waves-dark" ui-sref="panel.Cuidador" aria-expanded="false"><i class=" mdi mdi-worker"></i><span class="hide-menu">Cuidador</span></a>
+                        </li>
+
+                        <li> <a ng-show="Cuidador" class="waves-effect waves-dark" ui-sref="panel.Usuarios_Cuidador" aria-expanded="false"><i class=" mdi mdi-account-key"></i><span class="hide-menu">Usuarios Cuidador</span></a>
+                        </li>
+
+                        <li class="hidden-xs-up"> 
+                            <a  ng-click="cerrar_sesion()" class="waves-effect waves-dark" aria-expanded="false"><i class=" mdi mdi-power"></i><span class="hide-menu">Salir</span></a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-footer">
+                <!-- item--><a ui-sref="panel.Configuraciones"class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+                <!-- item--><a href="https://www.lalvirtual.edu.co/landing" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-telegram"></i></a>
+                <!-- item--><a ng-click="cerrar_sesion()" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> </div>
+            <!-- End Bottom points-->
+        </aside>
+
+            
+
+        <div class="page-wrapper">
+
+          
+           
+
+            <div class="container-fluid" ui-view>
+                    
+                <div class="col-md-12">
+                    
+                    <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor">Participantes  
+
+                        </h3> 
+
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+                            <li class="breadcrumb-item active">Participantes</li>
+                        </ol>
+                        <div ng-show="Admin">
+                             <select  class=" text-pequenio3" ng-model="sitio_colegio">
+                                    <option value="https://lalvirtual.edu.co">Liceo Adventista Libertad</option>
+                                    <option value="https://coab.micolevirtual.com">COAL Saravena</option>
+                            </select>
+
+                                    <button class="btn btn-info" ng-click="descargarDatos()">Descargar</button>
+                        </div>
+
+                           
+                    </div>
+
+                </div>
+
+            </div>
+                    
+             </div>
+            
+
+            <footer class="footer"> VotacionesLaL2018 kedaesva</footer>
+            
+        </div>
+       
+    </div>
+    
