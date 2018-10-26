@@ -5,6 +5,22 @@ angular.module('votacioneslive')
 
 	$scope.Gt 		= true;
 	$scope.puntos 	= [];
+	MySocket.emit('traer_clientes');
+
+	MySocket.on('me_recibieron_logueo', function(data){
+		
+		MySocket.emit('traer_clientes');
+
+	});	  
+
+	
+
+	
+	MySocket.on('conectado:alguien', (data)=>{
+
+
+		MySocket.emit('traer_clientes');
+	});
 
 
 	$http.get('::aspiraciones').then (function(result){
@@ -59,23 +75,6 @@ angular.module('votacioneslive')
 	 	
 	}
 
-	MySocket.on('me_recibieron_logueo', function(data){
-		
-		MySocket.emit('traer_clientes');
-
-	});	  
-
-	MySocket.on('logueado:alguien', (data)=>{
-
-
-		MySocket.emit('traer_clientes');
-	});
-
-	MySocket.on('clientes_traidos', function(data){
-
-		 $scope.puntos = data;		  
-	});	
-
 
 
 	 
@@ -120,21 +119,12 @@ angular.module('votacioneslive')
 
 	MySocket.on('participante_en_aspiracion', (data)=>{
 
-		console.log(data);
-
-		for (var i = 0; i < $scope.Participantes.length; i++) {
-			parti = $scope.Participantes[i];
-
-			if (parti.rowid == data.can) {
-				parti.votando_aspiracion_id = data.id;
-			}
-		}
+		MySocket.emit('traer_clientes');
 		
 	});
 
 	MySocket.on('Alguien_desconect', function(data){
 		
-
 		setTimeout(function() {
 
 			$scope.Tabla_Participantes();
@@ -173,6 +163,37 @@ angular.module('votacioneslive')
 	    	$scope.traerDatos();
 	    });
     	}	   
+			
+	} 
+
+	$scope.Ver_Usuario = function(punto){
+
+		$scope.punto = punto;
+
+	    var modalInstance = $uibModal.open({
+	        templateUrl: 'templates/Usuario_puntos.html',
+	        resolve: {
+		        punto: function () {
+		        	return  $scope.punto;
+		        },
+		        USER: function () {
+		        	return  $scope.USER;
+		        }
+		    },
+	        controller: 'Usuario_punto'  
+	    });
+
+	    modalInstance.result.then(function (result) {
+
+	    	
+
+	    	 MySocket.emit('Cerrar_sesion', {id: result});
+	    
+
+			
+	    }, function(r2){
+	    	$scope.traerDatos();
+	    });
 			
 	} 
 

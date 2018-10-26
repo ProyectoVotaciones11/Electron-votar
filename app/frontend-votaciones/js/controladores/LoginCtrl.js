@@ -3,6 +3,26 @@ angular.module('votacioneslive')
 
 .controller('LoginCtrl', function($scope, $state, ConexionServ, AuthServ, $http, MySocket, toastr, $rootScope){
 
+          $scope.punto = {};
+
+           MySocket.emit('mis_datos');
+
+            
+            MySocket.on('toma_datos', function(data){
+               $scope.punto = {};
+               $scope.punto = data.nombre_punto;
+            }); 
+
+             MySocket.on('te_conectaste', function(data){
+
+             
+
+             $scope.punto = data.datos.nombre_punto;
+      
+           MySocket.emit('mis_datos');
+
+        });    
+
 
    if ($rootScope.sesion_cerrada) {
         MySocket.emit('me_desconecte');
@@ -34,12 +54,6 @@ angular.module('votacioneslive')
  
       });  
 
-
-      MySocket.emit('mis_datos');
-      
-      MySocket.on('toma_datos', function(data){
-         $scope.punto = data.nombre_punto;
-      });   
 
     $scope.user ={};
 

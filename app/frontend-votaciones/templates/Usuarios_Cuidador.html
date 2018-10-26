@@ -39,7 +39,7 @@
                      <h1 class="col-sm-4">{{ aspiracion.aspiracion }}</h1> 
 
                       <span class="card col-sm-12" ng-repeat="Participante in puntos | participantesInAspiracion:aspiracion.rowid " 
-                        ng-click="Ver_Control(Participante)" >
+                        ng-click="Ver_Usuario(Participante)" >
 
                         <span  class="card-block">
                           <div>{{$index + 1 }}  {{Participante.user_data.Nombres}}  {{Participante.user_data.Apellidos}} : <strong>{{Participante.nombre_punto}}</strong> </div>             

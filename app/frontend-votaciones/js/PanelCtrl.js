@@ -26,6 +26,8 @@ angular.module('votacioneslive')
      $scope.Admin = false;
      $scope.Participante = false;
      $scope.Cuidador = false;
+     $scope.Cuidador_unico = false;
+     $scope.Participante_unico = false;
 
      $scope.Puestos = false;
 
@@ -95,12 +97,13 @@ angular.module('votacioneslive')
     $scope.Diferencia_de_Tipo = function(){
 
         if (USER.Tipo == 'Participante') {
-
+            $scope.Participante_unico = true;
             $scope.Participante = true;}
 
              if (USER.Tipo == 'Cuidador') {
-
+             $scope.Participante_unico = true;
             $scope.Participante = true;
+             $scope.Cuidador_unico = true;
             $scope.Cuidador = true;}
 
              if (USER.Tipo == 'Admin') {
