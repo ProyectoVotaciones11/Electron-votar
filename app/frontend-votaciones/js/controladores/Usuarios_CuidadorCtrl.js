@@ -119,6 +119,8 @@ angular.module('votacioneslive')
 
 	MySocket.on('participante_en_aspiracion', (data)=>{
 
+
+
 		MySocket.emit('traer_clientes');
 		
 	});
@@ -208,11 +210,19 @@ angular.module('votacioneslive')
 		if(participantes && aspiracion_id){
 			this.resp = [];
 
+
+
 			angular.forEach(participantes, function (participante, key) {
+
+				console.log(participante);
 				//console.log(participante, aspiracion_id);
-				if(participante.votando_aspiracion_id == aspiracion_id){
-					this.resp.push(participante);
+
+				if (participante.user_data.Grupo_id == localStorage.grupo_ciudar) {
+					if(participante.votando_aspiracion_id == aspiracion_id){
+						this.resp.push(participante);
+					}
 				}
+				
 			})
 
 			return this.resp

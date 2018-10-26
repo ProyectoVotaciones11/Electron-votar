@@ -30,18 +30,18 @@ function crearDatosIniciales() {
                     }else{
                         
                        
-                        consulta        = "INSERT INTO `Candidatos` VALUES('1','keinny Suzette', 'Ferrer Quirife', 'F', '11' ,'images/users/2.jpg', 1), " +
-                                                                  "('2','Kevin Daniel','Eslava Barroso','M','11','images/users/1.jpg','2'), " +
-                                                                  "('3','Juan Fernando','Eslava Vanegas','M','11','images/users/4.jpg','3'), " +
-                                                                  "('4','Jhan Carlos','Ruda Prada','M','11','images/users/5.jpg','1'), " +
-                                                                  "('5','Yeison Felmaber','Eslava Barroso','M','11','images/users/7.jpg','2'), " +
-                                                                  "('6','Andres David','Mendieta Olivera','M','11','images/users/8.jpg','3'), " +
-                                                                  "('7','Martin Daniel','Rincon Molina','M','11','images/users/7.jpg','1'), " +
-                                                                  "('8','Leidy Paola',' Garcia Parra','F','11','images/users/3.jpg','2'), " +
-                                                                  "('9','Angel Guillermo','Peñaredonda Silva','M','11','images/users/5.jpg','3'),"+ 
-                                                                  "('10','Voto', 'En Blanco', 'I', '0' ,'images/users/voto-blanco.jpg', 1),"+
-                                                                  "('100','Voto', 'En Blanco', 'I', '0' ,'images/users/voto-blanco.jpg', 2),"+
-                                                                  "('1000','Voto', 'En Blanco', 'I', '0' ,'images/users/voto-blanco.jpg', 3)";
+                        consulta        = "INSERT INTO `Candidatos` VALUES('1','keinny Suzette', 'Ferrer Quirife', 'F', '11', 'Plancha_E' ,'images/users/2.jpg', 1), " +
+                                                                  "('2','Kevin Daniel','Eslava Barroso','M','11', 'Plancha_E','images/users/1.jpg','2'), " +
+                                                                  "('3','Juan Fernando','Eslava Vanegas','M','11', 'Plancha_E','images/users/4.jpg','3'), " +
+                                                                  "('4','Jhan Carlos','Ruda Prada','M','11', 'Plancha_A','images/users/5.jpg','1'), " +
+                                                                  "('5','Yeison Felmaber','Eslava Barroso','M','11', 'Plancha_A','images/users/7.jpg','2'), " +
+                                                                  "('6','Andres David','Mendieta Olivera','M','11', 'Plancha_A','images/users/8.jpg','3'), " +
+                                                                  "('7','Martin Daniel','Rincon Molina','M','11' , 'PLancha_B','images/users/7.jpg','1'), " +
+                                                                  "('8','Leidy Paola',' Garcia Parra','F','11', 'PLancha_B','images/users/3.jpg','2'), " +
+                                                                  "('9','Angel Guillermo','Peñaredonda Silva','M','11', 'PLancha_B','images/users/5.jpg','3'),"+ 
+                                                                  "('10','Voto', 'En Blanco', 'I', '0' , 'Plancha_0','images/users/voto-blanco.jpg', 1),"+
+                                                                  "('100','Voto', 'En Blanco', 'I', '0' , 'Plancha_0','images/users/voto-blanco.jpg', 2),"+
+                                                                  "('1000','Voto', 'En Blanco', 'I', '0' , 'Plancha_0','images/users/voto-blanco.jpg', 3)";
                                                                   
                         db.query(consulta).then(function(res){
                             resolve2('Candidatos Insertados');

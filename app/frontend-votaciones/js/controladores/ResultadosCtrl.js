@@ -2,6 +2,12 @@ angular.module('votacioneslive')
 
 .controller('ResultadosCtrl', function($scope,  $uibModal, USER, AuthServ, toastr, $q, $http, MySocket){
 
+	$scope.imprimir = function() {
+		
+		window.print();
+    };
+
+
 	
   $http.get('::resultado',  {params: {Votacion_id: $scope.USER.Votacion_id}}).then(function(result){
 		$scope.Aspiraciones = result.data;

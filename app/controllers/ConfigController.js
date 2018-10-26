@@ -36,7 +36,7 @@ function getEditarHandler(req, res) {
 }
 
 function getCambiarPassHandler(req, res) {
-   consulta = "update  Participantes set password=? where rowid=?";
+   consulta = "update Participantes set password=? where rowid=?";
 	
 	db.query(consulta, [ req.query.password, req.query.rowid]).then (function(result){
 		res.send('Cambiado');

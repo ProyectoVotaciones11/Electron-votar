@@ -17,9 +17,9 @@
                         <div class="card">
                             <div class="card-block">
                                 <center class="m-t-30"> <img src="images/users/5.jpg" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">{{USER.Nombres}}</h4>
-                                    <h6 class="card-subtitle">{{USER.Apellidos}}</h6>
-                                    <h6 class="card-subtitle">{{USER.Password}}</h6>
+                                    <h4 class="card-title m-t-10">{{perfil.Nombres}}</h4>
+                                    <h6 class="card-subtitle">{{perfil.Apellidos}}</h6>
+                                    <h6 class="card-subtitle">{{perfil.Password}}</h6>
                                     
                                 </center>
                             </div>
@@ -34,31 +34,31 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Nombres</label>
                                         <div class="col-md-12">
-                                            <input type="text" ng-model="USER.Nombres" class="form-control form-control-line">
+                                            <input type="text" ng-model="perfil.Nombres" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Apellidos</label>
                                         <div class="col-md-12">
-                                            <input type="text" ng-model="USER.Apellidos" class="form-control form-control-line">
+                                            <input type="text" ng-model="perfil.Apellidos" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Sexo</label>
                                         <div class="col-md-12">
-                                            <input type="text" ng-model="Participantes.Sexo" class="form-control form-control-line">
+                                            <input type="text" ng-model="perfil.Sexo" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-md-12">Usuario</label>
                                         <div class="col-md-12">
-                                            <input type="Text" ng-model="USER.Username" class="form-control form-control-line"  >
+                                            <input type="Text" ng-model="perfil.Username" class="form-control form-control-line"  >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Contraseña</label>
                                         <div class="col-md-12">
-                                            <input type="Text" ng-model="Participantes.Password" class="form-control form-control-line">
+                                            <input type="Text" ng-model="perfil.Password" class="form-control form-control-line">
                                         </div>
                                     </div>
 
@@ -66,7 +66,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button ng-click="Modificar_perfil(USER)" class="btn btn-success">Actualizar</button>
+                                            <button ng-click="Modificar_perfil(perfil)" class="btn btn-success">Actualizar</button>
                                         </div>
                                     </div>
                                 </form>

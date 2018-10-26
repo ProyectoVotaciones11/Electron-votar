@@ -15,6 +15,7 @@ require('dotenv').config();
                         "Apellidos varchar(100)  NOT NULL collate nocase," +
                         "Sexo varchar(1)  DEFAULT NULL collate nocase," +
                         "Grupo_id integer (100)  DEFAULT NULL collate nocase," +
+                        "Plancha varchar (100) NOT NULL collate nocase," +
                         "Foto integer(100)  DEFAULT NULL collate nocase," +
                         "aspiracion_id integer(100)  NOT NULL)";
          

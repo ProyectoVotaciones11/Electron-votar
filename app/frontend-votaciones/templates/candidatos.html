@@ -37,6 +37,7 @@
                                                                 <th style="min-width: 60px;">Apellido</th>
                                                                 <th style="min-width: 60px;">Sexo</th>
                                                                 <th style="min-width: 60px;">Grupo</th>
+                                                                <th style="min-width: 60px;">Plancha</th>
                                                                 <th style="min-width: 60px;">Foto</th>
                                                                 <th style="min-width: 60px;">Aspiracion</th>
                                                                 <th style="min-width: 60px;">Modificar</th>
@@ -69,6 +70,10 @@
 
                                                                 <td ng-show="!candi.Mostrar_Candidatos">
                                                                      {{candi.Grupo_id}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Plancha}}
                                                                 </td>
 
                                                                 <td ng-show="!candi.Mostrar_Candidatos">
@@ -107,6 +112,18 @@
                                                                     <td ng-show="candi.Mostrar_Candidatos"> 
                                                                         <input class="text-pequenioe" type="text" ng-model="candi.Grupo_id" name=""> 
                                                                     </td>
+
+                                                                     <td ng-show="candi.Mostrar_Candidatos">
+
+                                                                     <select class="text-pequenio3" ng-model="candi.Plancha" >
+
+                                                                                <option>Plancha_A</option>
+                                                                                <option>Plancha_B</option>
+                                                                                 <option>Plancha_C</option>
+                                                                                 
+                                                                        </select>
+
+                                                                     </td>
 
                                                                     <td ng-show="candi.Mostrar_Candidatos"> 
                                                                         <input class="text-pequenio2" type="text" ng-model="candi.Foto" name=""> 

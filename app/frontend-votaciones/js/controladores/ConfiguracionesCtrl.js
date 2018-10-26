@@ -4,14 +4,23 @@ angular.module('votacioneslive')
 
 	console.log(USER);
 
+	$scope.perfil = {};
+
 
 		$scope.Tabla_Participantes = function(){
 
 		
 		$http.get('::usuarios').then (function(result){
-			$scope.Participantes = result.data ;
+			$scope.Participantes = result.data.participantes ;
+			for (var i = 0; i < $scope.Participantes.length; i++) {
 
-			console.log($scope.Participantes);
+				if ($scope.Participantes[i].rowid == USER.rowid) {
+					$scope.perfil = $scope.Participantes[i];
+					console.log($scope.perfil)
+				}
+				
+			}
+
 	
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
@@ -20,25 +29,14 @@ angular.module('votacioneslive')
 			
     }
 
-    $scope.Tabla_Votaciones = function(){
-
-			$http.get('::votaciones').then (function(result){
-			  $scope.votaciones = result.data ;
-					
-
-				}, function(tx){
-					toastr.error('Error trayendo votaciones');
-				});
-
-		}
-
-		$scope.Tabla_Votaciones();	
-	
+   
 
 		$scope.Tabla_Participantes();
 
 			    
 	  $scope.Modificar_perfil = function(modificar){
+
+	  	console.log(modificar);
 
 		$scope.Tabla_Participantes();
 
