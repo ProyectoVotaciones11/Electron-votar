@@ -1,0 +1,89 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Votaciones</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Votaciones</li>
+        </ol>
+    </div>
+    
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <div class="card" >
+
+                    
+                    <div class="card-block">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                    
+                                    <H1>Bienvenido a la votacion</H1>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                
+                <div class="card" >       
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12">
+                               
+                                 <div>
+
+                                    
+
+                                    <div>
+                                        <h1 ng-repeat="Aspi in Aspiraciones" class="btn-aspiracion" ng-class="{'asp-activa': Aspi.activa}">{{Aspi.aspiracion}}</h1>  
+                                          
+                                    </div>
+                                        
+                                      <div  ng-repeat="Aspi in Aspiraciones">
+
+
+                                        <div ng-repeat="candidato in Aspi.Candidatos" ng-show="Aspi.activa" class="opcion-candidato">
+                                          
+                                              
+                                            <div ng-click="Cambiar_active($parent.$index , candidato)" class="col-sm-6 " style="text-align: center;">
+
+                                                <img  src="{{candidato.Foto}}" class="foto-candidato img img-thumbnail " >
+                                                
+                                                <h2 class="  datos-candidato" >{{candidato.Nombres}} {{candidato.Apellidos}}</h2>
+                                           
+
+                                              </div>
+
+
+                                            
+                                           </div>
+
+                                      </div>
+                                    </div>
+                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+
+
+
+
+ 
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

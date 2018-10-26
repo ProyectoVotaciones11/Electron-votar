@@ -1,0 +1,210 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Votaciones</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Votaciones</li>
+        </ol>
+    </div>
+    
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <div class="card" style="overflow: auto;">
+            
+            
+                    <div class="card-block">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                
+                                <h3>Tabla de Votaciones</h3>
+                                <button ng-click="Mostrar_tabla_De_Crear()" class="btn btn-success"uib-tooltip="Nueva Votacion"> <i class="mdi mdi-account-plus"></i>Nueva Votacion</button>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th style="min-width: 60px;">Nombre</th>
+                                                <th style="min-width: 60px;">Alias</th>
+                                                <th style="min-width: 60px;">Descripcion</th>
+                                                <th style="min-width: 60px;">Username</th>
+                                                <th style="min-width: 60px;">Modificar</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr ng-repeat="vota in votaciones">
+
+                                                <!-- Tabla de Votaciones  -->
+
+                                                    <td>
+                                                            {{$index + 1}}
+                                                    </td>
+
+                                                    <td ng-show="!vota.Mostrar_Votaciones">
+                                                            {{vota.Nombre}}
+                                                    </td>
+
+                                                    <td ng-show="!vota.Mostrar_Votaciones"> 
+                                                            {{vota.Alias}}
+                                                    </td>
+
+                                                    <td ng-show="!vota.Mostrar_Votaciones">
+                                                            {{vota.descripcion}}
+                                                    </td>
+
+                                                    <td ng-show="!vota.Mostrar_Votaciones">
+                                                            {{vota.Username}}
+                                                    </td>
+
+                                                    
+                                                    <td ng-show="!vota.Mostrar_Votaciones">
+                                                        
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-sm waves-effect waves-light btn-info btn-sm" ng-click="Modificar_Votaciones(vota)" uib-tooltip="Editar">
+                                                                <i class="mdi mdi-pencil"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm waves-effect waves-light btn-danger btn-sm" ng-click="Delete_Votaciones(vota)" uib-tooltip="Eliminar">
+                                                                <i class="mdi mdi-window-close"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm waves-effect waves-light btn-primary btn-sm" ng-click="ver_aspiraciones(vota)" uib-tooltip="Ver aspiraciones">
+                                                                <i class="mdi mdi-eye"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        
+                                                    </td> 
+
+                                                    <!-- Tabla de editar votaciones  -->
+
+                                                    <td ng-show="vota.Mostrar_Votaciones"> 
+                                                            <input class="text-mediano" type="text" ng-model="vota.Nombre" name=""> 
+                                                    </td>
+
+                                                    <td ng-show="vota.Mostrar_Votaciones"> 
+                                                            <input class="text-pequenio2" type="text" ng-model="vota.Alias" name=""> 
+                                                    </td>
+
+                                                    <td ng-show="vota.Mostrar_Votaciones">
+                                                            <input class="text-mediano" type="text" ng-model="vota.descripcion" name=""> 
+                                                    </td>
+
+                                                    <td ng-show="vota.Mostrar_Votaciones"> 
+                                                            <input class="text-pequenio2" type="text" ng-model="vota.Username" name=""> 
+                                                    </td>
+
+                        
+                                                    <td ng-show="vota.Mostrar_Votaciones">
+                                                        <button class="btn waves-effect waves-light btn-success btn-sm" ng-click="Modificar_Votaciones(vota)"uib-tooltip="Guardar"> <i class="mdi mdi-floppy"></i>
+                                                        </button>
+                                                        <button class="btn waves-effect waves-light btn-warning btn-sm" ng-click="Ocultar_Tabla_de_Editar(vota)"uib-tooltip="Cancelar"> <i class="mdi mdi-arrow-left"></i>
+                                                        </button>
+                                                            <!-- <button class="btn waves-effect waves-light btn-warming btn-sm" ng-click="Mostrar_Cambiar_contrasena(vota)">
+                                                        Cambiar Contraseña</button> -->
+                                                    </td>  
+
+                                                <!-- Tabla de crear Votaciones  -->
+                                                
+                                                <tr ng-show="Mostrar_tabla_crear" >
+
+                                                    <td>
+                                                        #  
+                                                    </td>
+
+
+                                                    <td > 
+                                                        <input class="text-mediano" type="text" ng-value="Nombre" ng-model="Votaciones_nuevo.Nombre" >
+                                                    </td>
+
+                                                    <td > 
+                                                        <input class="text-pequenio2" type="text" ng-value="Alias" ng-model="Votaciones_nuevo.Alias" > 
+                                                    </td>
+
+                                                    <td > 
+                                                        <input class="text-mediano" type="text" ng-value="descripcion" ng-model="Votaciones_nuevo.descripcion"> 
+                                                    </td>
+
+                                                    <td >
+                                                            <input class="text-pequenio2" type="text" ng-value="Username" ng-model="Votaciones_nuevo.Username" > 
+                                                    </td>
+
+                                                    <td >
+                                                        <button class="btn waves-effect waves-light btn-primary btn-sm" ng-click="Insert_Votaciones(Votaciones_nuevo)" uib-tooltip="Crear"><i class="mdi mdi-content-save"></i>
+                                                        </button>
+                                                        <button class="btn waves-effect waves-light btn-warning btn-sm" ng-click="Ocultar_Votacion()"uib-tooltip="Cancelar"><i class="mdi mdi-arrow-left"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+    
+                                            </tr>                                      
+                                        </tbody>
+                                    </table>
+
+                                    <div ng-repeat="vota in votaciones">
+                                                
+                                        <div ng-show="vota.Cambiar_contrasena"> 
+
+                                            <label>Password</label>
+                                                    <input  type="text" ng-model="vota.Primera_password" name="">
+
+                                                <label>Confimar Password</label>
+                                                    <input  type="text" ng-model="vota.Comfirmar_Primera_password" name=""> 
+
+                                                <button ng-click="ocultar_Cambiar_contrasena(vota)">cancelar</button>
+
+                                                <button ng-click="Mostrar_Cambiar_contrasena(vota, Primera_password, Comfirmar_Primera_password)">Cambiar</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
+                                          
+                            <div class="card" ng-show="Aspiraciones.length > 0">
+                                <div class="card-block bg-info">
+                                    <h4 class="text-white card-title">Aspiraciones</h4>
+                                        </div>
+                                <div class="card-block">
+                                    <div class="message-box contact-box">
+                                        <h2  class="add-ct-btn">
+                                            <button  ng-click="copiar_votaciones()" uib-tooltip="Copiar aspiraciones a otra votación"  class="btn btn-circle btn-lg btn-success waves-effect waves-dark">
+                                                <i class="mdi mdi-redo"></i>
+                                            </button>
+                                        </h2>
+                                        <div class="message-widget contact-widget">
+                                            <!-- Message -->
+                                            <a href="" ng-repeat="aspi in Aspiraciones">
+                                                <div class="user-img"> <img src="images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                <div class="mail-contnet">
+                                                    <h5>{{aspi.aspiracion}}</h5> 
+                                                    <span class="mail-desc">{{aspi.descripcion}}</span>
+                                                </div>
+                                            </a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                
+            
+        </div>
+        
+    </div>      
+</div>
+
+

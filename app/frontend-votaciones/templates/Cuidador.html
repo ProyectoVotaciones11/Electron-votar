@@ -1,0 +1,47 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Cuidador</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Cuidador</li>
+        </ol>
+    </div>
+    
+</div>
+
+<div class="row">
+
+  <div class="col-md-12">
+      
+    <div class="card" >
+         
+        <div class="card-block">
+            
+            <div class="row" class="col-sm-12">
+
+                   <div class="col-sm-12">
+
+                   <h1>Cuidadores</h1> 
+
+
+                      <span class="card col-sm-4" ng-repeat="Participante in Participantes " 
+                            ng-click="Ver_Control(Participante)" >
+                          
+                            <span class="card-block"  >
+
+                               <div>{{$index + 1 }} : {{Participante.Nombres}} {{Participante.Apellidos}}</div> 
+
+                          </span>
+
+
+                      </span>
+
+                
+                  </div>
+            </div>
+        </div>
+      </div>       
+          
+    </div>
+    
+</div>      

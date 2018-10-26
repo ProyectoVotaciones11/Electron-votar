@@ -1,0 +1,217 @@
+<div class="row page-titles">
+    <div class="col-md-5 col-8 align-self-center">
+        <h3 class="text-themecolor">Candidatos</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Inicio</a></li>
+            <li class="breadcrumb-item active">Candidatos</li>
+        </ol>
+    </div>
+    
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <div class="card" style="overflow: auto;">
+            
+        
+                    <div class="card-block">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                        <h4 class="card-title"> Tabla de Candidatos</h4>
+
+                                         <button class="btn btn-success" ng-click="Mostrar_tabla_De_Crear() "  uib-tooltip="Nuevo Candidato"> <i class="mdi mdi-account-plus"></i> Nuevo Candidato</button>
+
+                            <div class="table-responsive">
+
+                                    <table class="table table-striped table-hover table-condensed">
+                                                        <thead>
+                                                           <tr>
+                                                                <th>#</th>
+                                                                <th style="min-width: 60px;">Nombre</th>
+                                                                <th style="min-width: 60px;">Apellido</th>
+                                                                <th style="min-width: 60px;">Sexo</th>
+                                                                <th style="min-width: 60px;">Grupo</th>
+                                                                <th style="min-width: 60px;">Foto</th>
+                                                                <th style="min-width: 60px;">Aspiracion</th>
+                                                                <th style="min-width: 60px;">Modificar</th>
+
+                                                            </tr>
+
+                                                        </thead>
+
+                                                        <tbody>
+
+                                                            <tr ng-repeat="candi in Candidatos">
+
+                                                                <!--Tabla de candidatos-->
+
+                                                                <td>
+                                                                    {{$index + 1}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Nombres}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Apellidos}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Sexo}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Grupo_id}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.Foto}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+                                                                     {{candi.aspiracion}}
+                                                                </td>
+
+                                                                <td ng-show="!candi.Mostrar_Candidatos">
+
+                                                                    <button class="btn waves-effect waves-light btn-info btn-sm" ng-click="Modificar_Candidatos(candi)" uib-tooltip="Editar">
+                                                                <i class="mdi mdi-pencil"></i>
+                                                                    </button>
+                                                                    <button class="btn waves-effect waves-light btn-danger btn-sm" ng-click="Delete_Candidatos(candi)"uib-tooltip="Eliminar">
+                                                                <i class="mdi mdi-window-close"></i>
+                                                                    </button>
+
+                                                                </td>
+
+                                                                <!--Tabla de editar candidato-->
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos"> 
+                                                                        <input class="text-pequenio2" type="text" ng-model="candi.Nombres" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos"> 
+                                                                        <input class="text-pequenio2" type="text" ng-model="candi.Apellidos" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos">
+                                                                     <input class="text-pequenioe" type="text" ng-model="candi.Sexo" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos"> 
+                                                                        <input class="text-pequenioe" type="text" ng-model="candi.Grupo_id" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos"> 
+                                                                        <input class="text-pequenio2" type="text" ng-model="candi.Foto" name=""> 
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos">
+
+                                                                        <div  >
+                                                                                
+                                                                                <select ng-model="candi.aspiracion_id"  >
+                                                                                      <option ng-repeat="aspi in Aspiraciones" value="{{aspi.rowid}}">
+                                                                                      {{aspi.aspiracion}}
+                                                                                      </option>
+                                                                                </select>
+
+                                                                         </div>
+
+                                                                    </td>
+
+                                                                    <td ng-show="candi.Mostrar_Candidatos">
+
+                                                                        <button class="btn waves-effect waves-light btn-success btn-sm" ng-click="Modificar_Candidatos(candi)" uib-tooltip="Guardar">
+                                                                                <i class="mdi mdi-floppy"></i>
+                                                                            </button>
+                                                                        <button class="btn waves-effect waves-light btn-warning btn-sm" ng-click="Ocultar_Tabla_de_Editar(candi)" uib-tooltip="Cancelar">
+                                                                                <i class="mdi mdi-arrow-left"></i>
+                                                                            </button>
+
+                                                                    </td>
+
+                                                                  <!--Tabla de nuevo candidato-->
+                                                               
+                                                               <tr ng-show="Mostrar_tabla_crear" >
+
+                                                                        <td>
+                                                                           #  
+                                                                        </td>
+
+                                                                        <td > 
+                                                                            <input class="text-pequenio2" type="text" ng-value="Nombres" ng-model="Candidatos_nuevo.Nombres"> 
+                                                                        </td>
+
+                                                                        <td > 
+                                                                            <input class="text-pequenio2" type="text" ng-value="Apellidos" ng-model="Candidatos_nuevo.Apellidos"> 
+                                                                        </td>
+
+                                                                        <td > 
+                                                                            <input class="text-pequenioe" type="text" ng-value="" ng-model="Candidatos_nuevo.Sexo"> 
+                                                                        </td>
+
+                                                                        <td> 
+                                                                            <input class="text-pequenioe" type="text" ng-value="" ng-model="Candidatos_nuevo.Grupo_id" > 
+                                                                        </td>
+
+                                                                       <td > 
+                                                                            <input class="text-pequenio2" type="text" ng-model="Candidatos_nuevo.Foto" name=""> 
+                                                                        </td>
+
+                                                                        <td >
+
+                                                                            
+                                                                                    
+                                                                                    <select ng-model="Candidatos_nuevo.aspiracion_id"  >
+                                                                                      <option ng-repeat="aspi in Aspiraciones" value="{{aspi.rowid}}">
+                                                                                      {{aspi.aspiracion}}
+                                                                                      </option>
+                                                                                     </select>
+
+                                                                            
+
+                                                                        </td>
+
+                                                                        <td >
+
+                                                                            <button class="btn waves-effect waves-light btn-primary btn-sm" ng-click="Insert_Candidatos(Candidatos_nuevo)"uib-tooltip="Crear">
+                                                                                <i class="mdi mdi-content-save"></i>
+                                                                            </button>
+                                                                            <button class="btn waves-effect waves-light btn-warning btn-sm" ng-click="Ocultar_Candidato()"uib-tooltip="Cancelar">
+                                                                                <i class="mdi mdi-arrow-left"></i>
+                                                                            </button>
+                                                                            
+                                                                        </td>
+
+                                                               </tr>
+                                                                
+                                                            </tr>
+                                                                                                
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                             </div>
+                                        </div>
+                                    </div>
+
+                                     <!-- Column -->
+                                     
+                                        
+                                </div>
+                             
+                                
+                            </div>
+                        </div>
+                      
+                      
+                    </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+	    <h3 class="modal-title" id="modal-title"><label>Grupos</label></h3>
+	</div>
+
+		<div class="modal-body" id="modal-body">
+			
+                <span ng-click="Enviar_Grupo(grup)" class=" btn btn-success  " ng-repeat="grup in grupos" >
+
+                      {{grup.numeros }}  
+
+                </span>
+
+		</div>
+	<div class="modal-footer">
+	   <button class="btn btn-success " type="button" ng-click="ok()">Cerrar</button>
+</div>

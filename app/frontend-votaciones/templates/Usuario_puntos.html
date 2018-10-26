@@ -1,0 +1,21 @@
+<div class="modal-header">
+	    <h3 class="modal-title" id="modal-title"><label>Usuario</label> : {{punto.user_data.Username}}  
+
+	    	 </h3>
+	</div>
+
+		<div class="modal-body" id="modal-body">
+
+			 <label>Nombres</label>
+			 	<div> {{punto.user_data.Nombres}} </div>
+			 <label>Apellidos</label>
+			 	<div> {{punto.user_data.Apellidos}} </div>
+			 <LABEL>Tipo</LABEL>
+				 <div> {{punto.user_data.Tipo}} </div>
+			<LABEL>Botones</LABEL>
+				 <div><button class="btn btn-danger" ng-click="CErrar(punto.user_data.rowid, punto.user_data.Tipo)">Cerrar Sesion</button> </div>
+
+		</div>
+	<div class="modal-footer">
+	   <button class="btn btn-success " type="button" ng-click="ok()">Cerrar</button>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Seleccione votación</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+
+    <table style="margin: 0 auto;">
+        <tr>
+            <td class="center bold">No</td>
+            <td class="center bold">Votación</td>
+            <td class="center bold">Descripción</td>
+        </tr>
+
+        <tr ng-repeat="votacion in votaciones">
+            <td class="no-padding bold align-right">
+                {{ $index + 1 }}
+            </td>
+            <td class="padding4">
+                {{votacion}}
+            </td>
+            <td class="padding4">
+            </td>
+            
+            
+        </tr>
+
+    
+           
+                
+    </table>
+
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="copiar()">Copiar</button>
+    <button class="btn btn-default" type="button" ng-click="ok()">Cerrar</button>
+</div>
