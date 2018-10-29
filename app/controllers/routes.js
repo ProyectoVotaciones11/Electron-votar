@@ -11,5 +11,6 @@ router.use('/votar', require('./VotarController'));
 router.use('/resultado', require('./ResultController'));
 router.use('/welcome', require('./WelcomeController'));
 router.use('/login', require('./LoginController'));
+router.use('/Exportar', require('./EnviarExcelCtrl'));
 
 module.exports = router;

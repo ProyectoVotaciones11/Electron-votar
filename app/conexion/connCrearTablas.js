@@ -15,7 +15,7 @@ require('dotenv').config();
                         "Apellidos varchar(100)  NOT NULL collate nocase," +
                         "Sexo varchar(1)  DEFAULT NULL collate nocase," +
                         "Grupo_id integer (100)  DEFAULT NULL collate nocase," +
-                        "Plancha varchar (100) NOT NULL collate nocase," +
+                        "Plancha_id varchar (100) NOT NULL collate nocase," +
                         "Foto integer(100)  DEFAULT NULL collate nocase," +
                         "aspiracion_id integer(100)  NOT NULL)";
          
@@ -36,6 +36,10 @@ require('dotenv').config();
                         "aspiracion varchar(100)  NOT NULL collate nocase," +
                         "votacion_id integer(100)  NOT NULL," +
                         "descripcion varchar(100)  DEFAULT NULL)"; 
+
+        sqlPlancha = "CREATE TABLE IF NOT EXISTS Aspiraciones (id integer," +
+                        "Nombre varchar(100)  NOT NULL collate nocase," +
+                        "votacion_id integer(100)  NOT NULL" ; 
       
 
 function createTable() {
@@ -56,6 +60,9 @@ function createTable() {
         }).then(function(res){
             console.log('Tabla Votos creada');
             return db.query(sqlAspiracion);
+        }).then(function(res){
+            console.log('Tabla Planchas creada');
+            return db.query(sqlPlancha);
         }).then(function(res){
             console.log('Tabla Aspiraciones creada');
             console.log('TODAS LAS TABLAS CREADAS');
