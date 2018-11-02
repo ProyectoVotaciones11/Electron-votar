@@ -10,6 +10,7 @@ router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/cambiar-pass').get(getCambiarPassHandler);
+router.route('/Traer-planchas').get(getPlachasPassHandler);
 
 
 function getRouteHandler(req, res) {
@@ -62,6 +63,16 @@ function getInsertarHandler(req, res) {
 	datos = [params.Nombre, params.Alias, params.descripcion, params.Username, "123"];     
 	db.query(consulta, datos).then (function(result){
         res.send('Insertado');
+	}, function(error){
+       res.status(400).send({ error: error })
+	})
+};
+
+function getPlachasPassHandler(req, res) {
+
+	consulta = "Select *, rowid FROM Planchas";     
+	db.query(consulta).then (function(result){
+        res.send(result); 
 	}, function(error){
        res.status(400).send({ error: error })
 	})

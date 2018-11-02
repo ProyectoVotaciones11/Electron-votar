@@ -90,28 +90,34 @@ angular.module('votacioneslive')
 	}
 	
 	
-	$scope.ver_aspiraciones = function(votacion){
+	$scope.Ver_Planchas = function(votacion){
 		
-		ConexionServ.query("SELECT a.rowid, a.*  FROM Aspiraciones a WHERE votacion_id=?", [votacion.rowid]).then(function(result){
-			$scope.Aspiraciones = result;
-			console.log(' tabla Aspiraciones ', result);
+		$http.get('::votaciones/Traer-planchas').then (function(result){
 
-		}, function(tx){
-			console.log('error', tx);
-		});
+
+			$scope.Planchas = result.data;
+
+			$scope.Traer_planchas($scope.Planchas, votacion);	
+
+		   }, function(tx){
+			   console.log('error', tx);
+		   });
 			
 	}
-	$scope.copiar_votaciones = function(){
+	$scope.Traer_planchas = function( plancha , votacion){
 		
 
 	    var modalInstance = $uibModal.open({
-	        templateUrl: 'templates/CopiarAspiracionesModal.html',
+	        templateUrl: 'templates/PlanchasModal.html',
 	        resolve: {
-		        votaciones: function () {
-		        	return $scope.votaciones;
+		        plancha: function () {
+		        	return plancha;
+		        },
+		        votacion: function () {
+		        	return votacion;
 		        }
 		    },
-	        controller: 'CopiarAspiracionesModalCtrl' // En LibroMesModales.js 
+	        controller: 'PlanchaModalCtrl' // En LibroMesModales.js 
 	    });
 
 	    modalInstance.result.then(function (result) {
@@ -197,31 +203,20 @@ angular.module('votacioneslive')
 
 
 
-.controller("CopiarAspiracionesModalCtrl", function($uibModalInstance, $scope, votaciones, ConexionServ, toastr, $filter) {
-    $scope.votaciones = votaciones;
+.controller("PlanchaModalCtrl", function($uibModalInstance, $scope, plancha, votacion, ConexionServ, toastr, $filter) {
+   
+   		 $scope.votacion = votacion;
 
-    
+   		 console.log(votacion);
 
+        $scope.plancha = plancha;
 
     $scope.ok = function () {
         $uibModalInstance.close('Cerrado');
     };
 
 
-    $scope.copiar = function(votacion) {
-
-        consulta 	= 'UPDATE lib_semanales SET ' + columna + '=? WHERE rowid=?';
-        colum 		= columna.charAt(0).toUpperCase() + columna.slice(1);
-        
-        ConexionServ.query(consulta, [libro[columna], libro.rowid]).then(function(){
-
-            
-        }, function(){
-            toastr.error(colum + ' NO guardado');
-        });
-
-    }
-    
+ 
 
 
     return ;

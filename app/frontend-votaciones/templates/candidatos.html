@@ -73,7 +73,7 @@
                                                                 </td>
 
                                                                 <td ng-show="!candi.Mostrar_Candidatos">
-                                                                     {{candi.Plancha}}
+                                                                     {{candi.planchas_nombre}}
                                                                 </td>
 
                                                                 <td ng-show="!candi.Mostrar_Candidatos">
@@ -115,7 +115,7 @@
 
                                                                      <td ng-show="candi.Mostrar_Candidatos">
 
-                                                                     <select class="text-pequenio3" ng-model="candi.Plancha" >
+                                                                     <select class="text-pequenio3" ng-model="candi.Plancha_id" >
 
                                                                                 <option>Plancha_A</option>
                                                                                 <option>Plancha_B</option>
@@ -176,6 +176,10 @@
 
                                                                         <td> 
                                                                             <input class="text-pequenioe" type="text" ng-value="" ng-model="Candidatos_nuevo.Grupo_id" > 
+                                                                        </td>
+                                                                        
+                                                                        <td> 
+                                                                            <input class="text-pequenioe" type="text" ng-value="" ng-model="Candidatos_nuevo.Plancha_id" > 
                                                                         </td>
 
                                                                        <td > 

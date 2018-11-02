@@ -37,9 +37,9 @@ require('dotenv').config();
                         "votacion_id integer(100)  NOT NULL," +
                         "descripcion varchar(100)  DEFAULT NULL)"; 
 
-        sqlPlancha = "CREATE TABLE IF NOT EXISTS Aspiraciones (id integer," +
+        sqlPlancha = "CREATE TABLE IF NOT EXISTS Planchas (id integer," +
                         "Nombre varchar(100)  NOT NULL collate nocase," +
-                        "votacion_id integer(100)  NOT NULL" ; 
+                        "votacion_id integer(100)  NOT NULL)" ; 
       
 
 function createTable() {

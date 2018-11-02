@@ -14,7 +14,8 @@ router.route('/cambiar-pass').get(getCambiarPassHandler);
 
 function getRouteHandler(req, res) {
 
-	consulta = "SELECT C.*, C.rowid, a.aspiracion from Candidatos C INNER JOIN Aspiraciones a ON C.aspiracion_id = a.rowid ";
+	consulta = "SELECT C.*, C.rowid, p.Nombre as planchas_nombre, a.aspiracion from Candidatos C INNER JOIN Aspiraciones a ON C.aspiracion_id = a.rowid "+
+				" INNER JOIN Planchas p ON C.Plancha_id = p.rowid";
 	db.query(consulta).then(function(result){
         Candidatos = result ;
     	res.json(Candidatos);
