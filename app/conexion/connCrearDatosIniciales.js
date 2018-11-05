@@ -61,8 +61,8 @@ function crearDatosIniciales() {
 
                         hash_password   = '123'
                         
-                        consulta = "INSERT INTO `Votaciones` VALUES ('1','Votacion Estudiantiles 2018','VTE2018','Se elije a un personero, representante y contralor de los estudiantes','Vota2018','" + hash_password + "'),"+
-                                                              "('2','Votaciones NaVi 2018','VNV2018','Se elije a NaVi de 11','VotNavi2018','" + hash_password + "')";
+                        consulta = "INSERT INTO `Votaciones` VALUES ('1','Votacion Estudiantiles 2018','VTE2018','Se elige a un personero, representante y contralor de los estudiantes','Vota2018','" + hash_password + "'),"+
+                                                              "('2','Votaciones NaVi 2018','VNV2018','Se elige a NaVi de 11','VotNavi2018','" + hash_password + "')";
                         db.query(consulta).then(function(res){
                             resolve2('Votaciones Insertadas');
                         })
@@ -82,10 +82,10 @@ function crearDatosIniciales() {
 
                         hash_password   = '123'
                         
-                        consulta = "INSERT INTO `Planchas` VALUES ('1', 'Plancha_A','1'),"+
-                                                                "('2','PLancha_B', '1'),"+
-                                                              "('2','PLancha_C', '2'),"+
-                                                              "('2','Plancha_D', '1')";
+                        consulta = "INSERT INTO `Planchas`(rowid, id, Nombre, votacion_id) VALUES ('1','1', 'Plancha A','1'),"+
+                                                                "('2','2','Plancha B', '1'),"+
+                                                              "('3','3','Plancha C', '2'),"+
+                                                              "('4','4','Plancha D', '1')";
                         db.query(consulta).then(function(res){
                             resolve2('Planchas Insertadas');
                         })

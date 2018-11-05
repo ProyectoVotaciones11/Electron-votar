@@ -175,8 +175,9 @@ self.io.on('connection', (socket)=> {
     for (let i = 0; i < all_clts.length; i++) {
 
       if (all_clts[i].resourceId == socket.id) {
-
-         self.io.to( all_clts[i].resourceId).emit('toma_datos', all_clts[i]);
+        all_clts[i].nombre_punto            = data.nombre_punto;
+        all_clts[i].user_data.nombre_punto  = data.nombre_punto;
+        self.io.to( all_clts[i].resourceId).emit('toma_datos', all_clts[i]);
         
       }
     }

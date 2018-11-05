@@ -22,6 +22,7 @@ require('dotenv').config();
          sqlVotaciones = "CREATE TABLE IF NOT EXISTS Votaciones (id integer," +
                         "Nombre varchar(100)  NOT NULL collate nocase," +
                         "Alias varchar(100)  NOT NULL collate nocase," +
+                        "actual integer(1)  DEFAULT 0," +
                         "descripcion varchar(100)  DEFAULT NULL collate nocase," +
                         "Username varchar (100)  DEFAULT NULL collate nocase," +
                         "Password varchar(100)  NOT NULL)";
