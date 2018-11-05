@@ -16,7 +16,7 @@ router.route('/participantes-por-grupo').put(putParticipantesPorGruposHandler);
 
 function getRouteHandler(req, res) {
 
-	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid";
+	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid and V.actual=1";
 	db.query(consulta).then(function(result){
         respuesta = {};
         respuesta.participantes = result ;
