@@ -12,5 +12,6 @@ router.use('/resultado', require('./ResultController'));
 router.use('/welcome', require('./WelcomeController'));
 router.use('/login', require('./LoginController'));
 router.use('/Exportar', require('./EnviarExcelCtrl'));
+router.use('/Plancha', require('./PlancController'));
 
 module.exports = router;

@@ -84,7 +84,7 @@ function crearDatosIniciales() {
                         
                         consulta = "INSERT INTO `Planchas` VALUES ('1', 'Plancha_A','1'),"+
                                                                 "('2','PLancha_B', '1'),"+
-                                                              "('2','PLancha_C', '1'),"+
+                                                              "('2','PLancha_C', '2'),"+
                                                               "('2','Plancha_D', '1')";
                         db.query(consulta).then(function(res){
                             resolve2('Planchas Insertadas');

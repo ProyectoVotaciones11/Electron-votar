@@ -5,15 +5,16 @@
 
 <div class="modal-body" id="modal-body">
 
-    <div>
-        <span ng-repeat="planch in plancha">
-            {{planch}}
-        </span>
-    </div>
+   <div>
+   	<input class="text-pequenio2" type="text" ng-model="plancha_nueva.Nombre" name="">
+   	 <button class="btn btn-sm waves-effect waves-light btn-info btn-sm" ng-click="Craer_plancha(plancha_nueva.Nombre)">Añadir Plancha</button>
+   </div>
+
+        
+
 
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="copiar()">Seleccionar</button>
     <button class="btn btn-default" type="button" ng-click="ok()">Cerrar</button>
 </div>

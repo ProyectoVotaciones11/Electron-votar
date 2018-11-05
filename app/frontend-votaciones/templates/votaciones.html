@@ -74,7 +74,7 @@
                                                             <button class="btn btn-sm waves-effect waves-light btn-danger btn-sm" ng-click="Delete_Votaciones(vota)" uib-tooltip="Eliminar">
                                                                 <i class="mdi mdi-window-close"></i>
                                                             </button>
-                                                            <button class="btn btn-sm waves-effect waves-light btn-primary btn-sm" ng-click="Ver_Planchas(vota)" uib-tooltip="Elegir Planchas">
+                                                            <button class="btn btn-sm waves-effect waves-light btn-primary btn-sm" ng-click="Ver_Planchas(vota.rowid)" uib-tooltip="Elegir Planchas">
                                                                 <i class="mdi mdi-eye"></i>
                                                             </button>
                                                         </div>
@@ -148,47 +148,31 @@
                                         </tbody>
                                     </table>
 
-                                    <div ng-repeat="vota in votaciones">
-                                                
-                                        <div ng-show="vota.Cambiar_contrasena"> 
-
-                                            <label>Password</label>
-                                                    <input  type="text" ng-model="vota.Primera_password" name="">
-
-                                                <label>Confimar Password</label>
-                                                    <input  type="text" ng-model="vota.Comfirmar_Primera_password" name=""> 
-
-                                                <button ng-click="ocultar_Cambiar_contrasena(vota)">cancelar</button>
-
-                                                <button ng-click="Mostrar_Cambiar_contrasena(vota, Primera_password, Comfirmar_Primera_password)">Cambiar</button>
-
-                                        </div>
-
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div ng-show="Mostrar_planchas" class="col-lg-4 col-xlg-3 col-md-5">
                                           
-                            <div class="card" ng-show="Aspiraciones.length > 0">
+                            <div  class="card" >
                                 <div class="card-block bg-info">
-                                    <h4 class="text-white card-title">Aspiraciones</h4>
+                                    <h4 class="text-white card-title">Planchas</h4>
                                         </div>
-                                <div class="card-block">
+                                <div  class="card-block">
                                     <div class="message-box contact-box">
                                         <h2  class="add-ct-btn">
-                                            <button  ng-click="copiar_votaciones()" uib-tooltip="Copiar aspiraciones a otra votación"  class="btn btn-circle btn-lg btn-success waves-effect waves-dark">
+                                            <button  ng-click="Crear_plancha(votacion)" uib-tooltip="Copiar aspiraciones a otra votación"  class="btn btn-circle btn-lg btn-success waves-effect waves-dark">
                                                 <i class="mdi mdi-redo"></i>
                                             </button>
                                         </h2>
                                         <div class="message-widget contact-widget">
                                             <!-- Message -->
-                                            <a href="" ng-repeat="aspi in Aspiraciones">
+                                            <a ng-repeat="Plach in Planchas" ng-click="Editar_plancha(Plach)" href="" >
                                                 <div class="user-img"> <img src="images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>{{aspi.aspiracion}}</h5> 
-                                                    <span class="mail-desc">{{aspi.descripcion}}</span>
+                                                <div    class="mail-contnet">
+                                                    <h5>{{Plach.Nombre}}</h5> 
+                                                    <span class="mail-desc">{{Plach.Nombre}}</span>
                                                 </div>
                                             </a>
                                             

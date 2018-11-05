@@ -5,12 +5,8 @@ angular.module('votacioneslive')
 	$scope.Mostrar_Votaciones = false;
 	$scope.Votaciones_nuevo = {};
 	$scope.Mostrar_tabla_crear = false;
-	$scope.Cambiar_contrasena = false;
-	$scope.Primera_password = false;
-	$scope.Comfirmar_Primera_password = false;
+	$scope.Mostrar_planchas = false;
 
-
-	
 
 		$scope.Tabla_Votaciones = function(){
 
@@ -91,19 +87,64 @@ angular.module('votacioneslive')
 	
 	
 	$scope.Ver_Planchas = function(votacion){
+		$scope.Planchas = [];
+
+		$scope.votacion_plancha = votacion;
 		
 		$http.get('::votaciones/Traer-planchas').then (function(result){
 
+			$scope.Mostrar_planchas = true;
 
-			$scope.Planchas = result.data;
-
-			$scope.Traer_planchas($scope.Planchas, votacion);	
+			for (var i = 0; i < result.data.length; i++) {
+			
+				if (result.data[i].votacion_id == votacion) {
+					$scope.Planchas.push(result.data[i]);
+				}
+			}	
 
 		   }, function(tx){
 			   console.log('error', tx);
 		   });
 			
 	}
+
+	$scope.Crear_plancha = function(votacion){
+		
+		$scope.Traer_planchas($scope.Planchas, $scope.votacion_plancha);					   
+		
+	}
+
+	
+
+
+	$scope.Editar_plancha = function( plancha ){
+		
+
+	    var modalInstance = $uibModal.open({
+	        templateUrl: 'templates/EditarPlanchaModal.html',
+	        resolve: {
+		        plancha: function () {
+		        	return plancha;
+		        },
+		        votacion: function () {
+		        	return $scope.votacion_plancha;
+		        }
+		    },
+	        controller: 'PlanchaModalCtrl2' // En LibroMesModales.js 
+	    });
+
+	    modalInstance.result.then(function (result) {
+			console.log(result);
+
+			$scope.Ver_Planchas(result);
+
+	    }, function(r2){
+	    	
+	    });
+			
+	}
+
+
 	$scope.Traer_planchas = function( plancha , votacion){
 		
 
@@ -122,22 +163,13 @@ angular.module('votacioneslive')
 
 	    modalInstance.result.then(function (result) {
 			console.log(result);
+
+			$scope.Ver_Planchas(result);
+
 	    }, function(r2){
-	    	$scope.traerDatos();
+	    	
 	    });
 			
-	}
-
-	$scope.Anadir_Aspiraciones = function(modificar){
-
-		ConexionServ.query("UPDATE Aspiraciones  SET votacion_id=? WHERE rowid=? ", [modificar, modificar.rowid]).then(function(result){
-					console.log("hola")
-
-				}, function(tx){
-					console.log('error en modificar', tx);
-				});
-
-
 	}
 
 
@@ -160,63 +192,76 @@ angular.module('votacioneslive')
 		$scope.Mostrar_tabla_crear = false;
 
 		}
-
-	$scope.Mostrar_Cambiar_contrasena = function(modificar, Primera_password, Comfirmar_Primera_password){
-
-		if(modificar.Cambiar_contrasena == true){
-			modificar.Cambiar_contrasena = false;
-
-			if (modificar.Primera_password == modificar.Comfirmar_Primera_password) {
-
-				ConexionServ.query("UPDATE Votaciones  SET  Password=? WHERE rowid=? ", [ modificar.Primera_password,  modificar.rowid]).then(function(result){
-				console.log("hola")
-
-						$scope.Tabla_Votaciones();	
-
-					}, function(tx){
-						console.log('error', tx);
-					});
-
-			}else{
-				console.log("nulo")
-			}
-
-			return
-		}
-
-			for (var i = 0; i < $scope.votaciones.length; i++) {
-			$scope.votaciones[i].Cambiar_contrasena = false;
-		}
-		modificar.Cambiar_contrasena = true;
-
-
-		}
-
-	$scope.ocultar_Cambiar_contrasena = function(modificar){
-		
-		modificar.Cambiar_contrasena = false;
-
-	}
-
 })
 
 
+.controller("PlanchaModalCtrl", function($uibModalInstance, $scope, plancha, votacion,  ConexionServ, toastr, $filter, $http) { 
 
-
-.controller("PlanchaModalCtrl", function($uibModalInstance, $scope, plancha, votacion, ConexionServ, toastr, $filter) {
-   
-   		 $scope.votacion = votacion;
-
-   		 console.log(votacion);
+   		$scope.plancha_nueva = {};
 
         $scope.plancha = plancha;
+         console.log(  votacion);
+
+   
+
+   $scope.Craer_plancha = function(Plancha){
+
+   	console.log(Plancha);
+		
+		$http.get('::Plancha/insertar', {params: { Nombre: Plancha, votacion_id: votacion }}).then (function(result){
+	
+
+		   }, function(tx){
+			   console.log('error', tx);
+		   });
+
+		$uibModalInstance.close(votacion);
+
+		}
+ 
 
     $scope.ok = function () {
-        $uibModalInstance.close('Cerrado');
+       $uibModalInstance.close(votacion);
     };
 
 
+    return ;
+})
+
+.controller("PlanchaModalCtrl2", function($uibModalInstance, $scope, plancha, votacion,  ConexionServ, toastr, $filter, $http) { 
+
+        $scope.plancha = plancha;
+         console.log(  votacion);
+
+   $scope.Editar_planch = function(Plancha){
+
+   	console.log(Plancha);
+		
+		$http.get('::Plancha/editar', {params: { Nombre: Plancha.Nombre, rowid: Plancha.rowid }}).then (function(result){
+	
+
+		   }, function(tx){
+			   console.log('error', tx);
+		   });
+
+		$uibModalInstance.close(votacion);
+
+		}
+
+	$scope.Eliminar_plancha = function(){
+
+		$http.delete('::Plancha/eliminar', {params: { id: plancha.rowid} }).then (function(result){			
+
+		   }, function(tx){
+			   console.log('error', tx);
+		   });
+		$uibModalInstance.close(votacion);
+	}
  
+
+    $scope.ok = function () {
+       $uibModalInstance.close(votacion);
+    };
 
 
     return ;

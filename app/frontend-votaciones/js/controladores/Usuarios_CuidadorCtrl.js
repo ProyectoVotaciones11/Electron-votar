@@ -42,6 +42,26 @@ angular.module('votacioneslive')
 
 	});	
 
+	$scope.comparar_votos = function(Participantes){
+
+	for (var H = 0; H < Participantes.length; H++) {
+
+			Participantes[H].Votos = 0;
+
+			for (var i = 0; i < $scope.Votos.length; i++) {
+
+			    if ($scope.Votos[i].Participante_id == Participantes[H].rowid) {
+					Participantes[H].Votos = Participantes[H].Votos + 1;
+				}
+			}
+
+			if (Participantes[H].Votos == 3) {
+
+				$scope.Participantes.pop();
+			}
+	}	
+}
+
 
 
 	$scope.Participantes_grupo = function(num_grupo){
@@ -49,12 +69,18 @@ angular.module('votacioneslive')
 		$scope.Grupo_enviado 		= num_grupo;		
 		$scope.Participantes 		= [];
 
+
+
 		for (let i = 0; i <	 $scope.Grupo_id.length; i++) {
 
 
 			if ($scope.Grupo_id[i].Grupo_id == $scope.Grupo_enviado) {
 
 				$scope.Participantes.push($scope.Grupo_id[i]);
+
+				
+			 		$scope.comparar_votos($scope.Participantes);
+			 	
 
 				if ($scope.puntos.length > 0) {
 					for (let h = 0; h <	$scope.puntos.length; h++) {						      		
@@ -72,13 +98,23 @@ angular.module('votacioneslive')
 					    
 			}	
 	 	}
+
+ 	
 	 	
 	}
 
-
-
 	 
 	$scope.Tabla_Participantes = function(){
+
+		$http.get('::votos').then (function(result){
+
+			$scope.Votos = result.data;
+
+
+		}, function(error){
+			console.log('No se pudo traer los datos', error);
+
+		})
 
 		
 		$http.get('::usuarios').then (function(result){
@@ -214,7 +250,7 @@ angular.module('votacioneslive')
 
 			angular.forEach(participantes, function (participante, key) {
 
-				console.log(participante);
+				
 				//console.log(participante, aspiracion_id);
 
 				if (participante.user_data.Grupo_id == localStorage.grupo_ciudar) {
