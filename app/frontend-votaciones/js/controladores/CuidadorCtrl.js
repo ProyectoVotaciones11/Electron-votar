@@ -4,6 +4,10 @@ angular.module('votacioneslive')
 
 	$scope.Participantes = [];
 
+	if ($scope.USER.Tipo == "Participante") {
+		 $state.go('panel');
+	}
+
 	$scope.puntos = [];
 	MySocket.emit('traer_clientes');
 

@@ -11,9 +11,12 @@ angular.module('votacioneslive')
 		
 		MySocket.emit('traer_clientes');
 
-	});	  
+	});	 
 
-	
+
+	if ($scope.USER.Tipo == "Participante") {
+		 $state.go('panel');
+	} 
 
 	
 	MySocket.on('conectado:alguien', (data)=>{

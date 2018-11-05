@@ -1,10 +1,14 @@
 angular.module('votacioneslive')
 
-.controller('CandidatosCtrl', function($scope,ConexionServ,$filter, $http){
+.controller('CandidatosCtrl', function($scope,ConexionServ,$filter, $http, $state){
 
 	$scope.Mostrar_Candidatos = false;
 	$scope.Candidatos_nuevo = {};
 	$scope.Mostrar_tabla_crear = false;
+
+	if ($scope.USER.Tipo != "Admin") {
+		 $state.go('panel');
+	}
 
 
 

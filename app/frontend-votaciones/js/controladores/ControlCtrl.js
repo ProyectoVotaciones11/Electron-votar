@@ -3,6 +3,10 @@ angular.module('votacioneslive')
 
 .controller('ControlCtrl', function($scope, $state,  AuthServ, $q, toastr, $http, MySocket, $uibModal){
 
+	if ($scope.USER.Tipo != "Admin") {
+		 $state.go('panel');
+	}
+
 
 	$scope.traer_clientes = () => {
 		MySocket.emit('traer_clientes');

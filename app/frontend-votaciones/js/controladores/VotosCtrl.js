@@ -2,7 +2,11 @@ angular.module('votacioneslive')
 
 .controller('VotosCtrl', function($scope,ConexionServ,$filter, $http, MySocket){
 
-	ConexionServ.createTables();
+	
+
+	if ($scope.USER.Tipo == "Participante") {
+		 $state.go('panel');
+	}
 
 	$scope.Tabla_Votos = function(){
 

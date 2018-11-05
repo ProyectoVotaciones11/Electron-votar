@@ -1,11 +1,15 @@
 angular.module('votacioneslive')
 
-.controller('VotacionesCtrl', function($scope,ConexionServ,$filter, $uibModal, toastr, $http){
+.controller('VotacionesCtrl', function($scope,ConexionServ,$filter, $uibModal, toastr, $http, $state){
 
 	$scope.Mostrar_Votaciones = false;
 	$scope.Votaciones_nuevo = {};
 	$scope.Mostrar_tabla_crear = false;
 	$scope.Mostrar_planchas = false;
+
+	if ($scope.USER.Tipo != "Admin") {
+		 $state.go('panel');
+	}
 
 
 		$scope.Tabla_Votaciones = function(){

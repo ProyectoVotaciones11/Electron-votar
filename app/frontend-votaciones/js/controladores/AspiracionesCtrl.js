@@ -1,10 +1,14 @@
 angular.module('votacioneslive')
 
-.controller('AspiracionesCtrl', function($scope,ConexionServ,$filter, $uibModal, $http){
+.controller('AspiracionesCtrl', function($scope,ConexionServ,$filter, $state, $uibModal, $http){
 
 	$scope.Mostrar_Aspiraciones = false;
 	$scope.nueva_Aspiraciones = {};
 	$scope.Mostrar_tabla_crear = false;
+
+	if ($scope.USER.Tipo != "Admin") {
+		 $state.go('panel');
+	}
 
 	ConexionServ.createTables();
 

@@ -7,6 +7,11 @@ angular.module('votacioneslive')
 		window.print();
     };
 
+
+    if ($scope.USER.Tipo == "Participante") {
+		 $state.go('panel');
+	}
+
 	$scope.exportar_excel = function() {
 		$window.open(window.location.protocol + '//' + window.location.hostname + ':3000/api/Exportar/exportar-usuarios');
 		/*

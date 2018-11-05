@@ -1,11 +1,15 @@
 angular.module('votacioneslive')
 
-.controller('ParticipantesCtrl', function($scope,$filter, $http, $anchorScroll, $location){
+.controller('ParticipantesCtrl', function($scope,$filter, $http,  $state, $anchorScroll, $location){
 
 	$scope.Mostrar_Participantes 		= false;
 	$scope.Participante_nuevo 			= {};
 	$scope.Mostrar_tabla_crear 			= false;
 	$scope.data 						= [];
+
+	if ($scope.USER.Tipo == "Participante") {
+		 $state.go('panel');
+	}
 
 	
 
