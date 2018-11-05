@@ -61,8 +61,8 @@ function crearDatosIniciales() {
 
                         hash_password   = '123'
                         
-                        consulta = "INSERT INTO `Votaciones` VALUES ('1','Votacion Estudiantiles 2018','VTE2018','Se elige a un personero, representante y contralor de los estudiantes','Vota2018','" + hash_password + "'),"+
-                                                              "('2','Votaciones NaVi 2018','VNV2018','Se elige a NaVi de 11','VotNavi2018','" + hash_password + "')";
+                        consulta = "INSERT INTO `Votaciones` VALUES ('1','Votacion Estudiantiles 2018','VTE2018', '1' ,'Se elige a un personero, representante y contralor de los estudiantes','Vota2018','" + hash_password + "'),"+
+                                                              "('2','Votaciones NaVi 2018','VNV2018', '0' ,'Se elige a NaVi de 11','VotNavi2018','" + hash_password + "')";
                         db.query(consulta).then(function(res){
                             resolve2('Votaciones Insertadas');
                         })

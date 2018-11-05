@@ -38,7 +38,7 @@ function postRouteHandler(req, res) {
 
 function CandidatoAspiracionHandler(req, res) {
 
-	consulta = "SELECT *, rowid from Candidatos  WHERE aspiracion_id = ? ";
+	consulta = "SELECT c.*, c.rowid,  p.Nombre as planchas_nombre  from Candidatos c INNER JOIN Planchas p ON c.Plancha_id = p.rowid WHERE aspiracion_id = ? ";
 	    
 	db.query(consulta, [req.query.id]).then (function(result){
 

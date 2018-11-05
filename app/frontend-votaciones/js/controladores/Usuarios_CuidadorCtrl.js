@@ -106,6 +106,9 @@ angular.module('votacioneslive')
 	 	
 	}
 
+
+ 
+
 	 
 	$scope.Tabla_Participantes = function(){
 
