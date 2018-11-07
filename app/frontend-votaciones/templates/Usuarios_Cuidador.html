@@ -18,35 +18,46 @@
         <div class="card-block">
 
             
-            <div class="row col-sm-12" >
+            <div  >
 
-                 <div class="col-sm-3">
+                 <uib-accordion class="col-sm-3">
+    
+                     <div uib-accordion-group  is-open="status.open">
+                        <uib-accordion-heading>
+                         <h1>ninguna </h1>
+                        </uib-accordion-heading>
+                        <div class="col-sm-12">
+                          <span class="card col-sm-12" ng-repeat="Participante in Participantes "  ng-click="Ver_Control(Participante)">
+                            <span  class="card-block">
+                                <div>{{$index + 1 }}  {{Participante.Nombres}}  {{Participante.Apellidos}} : <strong>{{Participante.punto}}</strong> </div>             
+                              </span>
+                          </span>
+                        </div>
+    
+                     </div>
 
-                      <h1 class="col-sm-4">En ninguna</h1>
+                  </uib-accordion>
 
-                      <span class="card col-sm-12" ng-repeat="Participante in Participantes " 
-                        ng-click="Ver_Control(Participante)" >
 
-                        <span  class="card-block">
-                          <div>{{$index + 1 }}  {{Participante.Nombres}}  {{Participante.Apellidos}} : <strong>{{Participante.punto}}</strong> </div>             
-                        </span>
-                    </span>
+                  <uib-accordion ng-repeat="aspiracion in aspiraciones" class="col-sm-3">
+    
+                     <div uib-accordion-group  is-open="status.open">
+                        <uib-accordion-heading>
+                         <h1 class="col-sm-4">{{ aspiracion.aspiracion }}</h1> 
+                        </uib-accordion-heading>
+                        <div class="col-sm-12">
+                          <span class="card col-sm-12"  ng-repeat="Participante in puntos | participantesInAspiracion:aspiracion.rowid " ng-click="Ver_Usuario(Participante)">
+                            <span  class="card-block">
+                                <div>{{$index + 1 }}  {{Participante.user_data.Nombres}}  {{Participante.user_data.Apellidos}} : <strong>{{Participante.nombre_punto}}</strong> </div>             
+                              </span>
+                          </span>
+                        </div>
+    
+                     </div>
 
-                 </div>
+                  </uib-accordion>
 
-                   <div class="col-sm-3" ng-repeat="aspiracion in aspiraciones">
-
-                     <h1 class="col-sm-4">{{ aspiracion.aspiracion }}</h1> 
-
-                      <span class="card col-sm-12" ng-repeat="Participante in puntos | participantesInAspiracion:aspiracion.rowid " 
-                        ng-click="Ver_Usuario(Participante)" >
-
-                        <span  class="card-block">
-                          <div>{{$index + 1 }}  {{Participante.user_data.Nombres}}  {{Participante.user_data.Apellidos}} : <strong>{{Participante.nombre_punto}}</strong> </div>             
-                        </span>
-                    </span>
-
-                  </div>
+                  
 
             </div>
         </div>
@@ -58,22 +69,6 @@
 
 
 
-  <uib-accordion >
-    
-    <div uib-accordion-group  is-open="status.open">
-      <uib-accordion-heading>
-       <span class="card col-sm-12" ng-repeat="Participante in Participantes " 
-                        >
-
-            <h1 class="col-sm-4">En ninguna</h1>
-
-      </uib-accordion-heading>
-            <span  class="card-block">
-              <div>{{$index + 1 }}  {{Participante.Nombres}}  {{Participante.Apellidos}} : <strong>{{Participante.punto}}</strong> </div>             
-            </span>
-        </span>
-    </div>
-
-  </uib-accordion>
+  
 
 </div>      

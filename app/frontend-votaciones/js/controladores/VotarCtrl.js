@@ -142,7 +142,7 @@ angular.module('votacioneslive')
 
 			if ($scope.Voto =='Voto') {
 			
-		 fecha_nac = '' + fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + (fecha.getDate() + 1) + '/' + fecha.getHours() + ' :' +  fecha.getMinutes() + ' :' + fecha.getSeconds();
+		 fecha_nac = '' + fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + (fecha.getDate()) + '/' + fecha.getHours() + ' :' +  fecha.getMinutes() + ' :' + fecha.getSeconds();
 
 			$http.get('::votar/Cambiaractive', {params: { user_id: $scope.USER.rowid, id: candidato.rowid, aspiracion_id: candidato.aspiracion_id, fecha: fecha_nac }}).then(function(result){
 
