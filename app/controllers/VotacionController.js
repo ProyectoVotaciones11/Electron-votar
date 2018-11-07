@@ -11,6 +11,9 @@ router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/cambiar-pass').get(getCambiarPassHandler);
 router.route('/Traer-planchas').get(getPlachasPassHandler);
+router.route('/actual').get(getactualPassHandler);
+router.route('/Copiar-Participantes').put(putCopiarParticipantesPassHandler);
+router.route('/actual2').get(getactual2PassHandler)
 
 
 function getRouteHandler(req, res) {
@@ -31,10 +34,10 @@ function postRouteHandler(req, res) {
 
 function getEditarHandler(req, res) {
 
-	consulta = "UPDATE votaciones  SET Nombre=? , Alias=? , descripcion=? , Username=? , Password=? WHERE rowid=?  ";
+	consulta = "UPDATE votaciones  SET Nombre=? , Alias=? , descripcion=? , actual=? , Username=? , Password=? WHERE rowid=?  ";
 	params = req.query;
 
-	datos = [params.Nombre, params.Alias, params.descripcion, params.Username , params.Password, params.rowid];     
+	datos = [params.Nombre, params.Alias, params.descripcion, params.actual, params.Username , params.Password, params.rowid];     
 	db.query(consulta, datos).then (function(result){
      
         res.send('Editado');
@@ -58,9 +61,9 @@ function getCambiarPassHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 
-	consulta = "INSERT INTO votaciones( Nombre,  Alias, descripcion, Username, Password ) VALUES( ?, ?, ?, ?, ?)";
+	consulta = "INSERT INTO votaciones( Nombre,  Alias, descripcion, actual, Username, Password ) VALUES( ?, ?, ?, ?, ?, ?)";
 	params = req.query;
-	datos = [params.Nombre, params.Alias, params.descripcion, params.Username, "123"];     
+	datos = [params.Nombre, params.Alias, params.descripcion, params.actual, params.Username, "123"];     
 	db.query(consulta, datos).then (function(result){
         res.send('Insertado');
 	}, function(error){
@@ -77,6 +80,72 @@ function getPlachasPassHandler(req, res) {
        res.status(400).send({ error: error })
 	})
 };
+
+function getactualPassHandler(req, res) {
+
+	consulta = "update  votaciones set actual=? ";     
+	db.query(consulta, [0]).then (function(result){
+        res.send(result); 
+	}, function(error){
+       res.status(400).send({ error: error })
+	})
+};
+
+
+function getactual2PassHandler(req, res) {
+
+	consulta = "update  votaciones set actual=? WHERE rowid=?";     
+	db.query(consulta, [1, req.query.rowid]).then (function(result){
+        res.send(result); 
+	}, function(error){
+       res.status(400).send({ error: error })
+	})
+};
+
+
+function putCopiarParticipantesPassHandler(req, res) {
+
+		promesas = [];
+
+		consulta = "Select *,rowid FROM Participantes WHERE Votacion_id = ?";    
+			db.query(consulta, [ req.body.Votacion_copiada_rowid]).then (function(result){
+
+			ParticipantesVotacion = result;
+			
+			
+			for (var i = 0; i < ParticipantesVotacion.length; i++) {
+			ParticipantesVotacion[i]
+
+				consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Sexo, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				part = ParticipantesVotacion[i];
+
+			
+				datos = [part.Nombres, part.Apellidos, part.Username, part.Password, part.Sexo, part.Grupo_id, req.body.Votacion_id, part.Tipo]; 
+
+				prome = db.query(consulta,datos);
+				
+				promesas.push(prome);
+				
+			
+		}
+		
+		
+		Promise.all(promesas).then(function(resul){
+			res.send('Insertados');
+		}, function(error){
+			res.status(400).send({ error: error })
+		})
+		
+
+	}, function(error){
+       res.status(400).send({ error: error })
+	})
+
+
+};
+
+
 
 
 function deleteUsuarioHandler(req, res) {

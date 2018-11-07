@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Escoga la votacion </h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+
+   <div ng-repeat="vota in Votaciones">
+   	<span ng-click="Votacion_elegida(vota)"> {{vota.Nombre}}</span>
+   	 
+   </div>
+
+</div>
+
+<div class="modal-footer">
+	 <button class="btn btn-sm waves-effect waves-light btn-info " ng-click="Votacion_elegida(vota)">Cambiar</button>
+    <button class="btn btn-default" type="button" ng-click="ok()">Cerrar</button>
+</div>

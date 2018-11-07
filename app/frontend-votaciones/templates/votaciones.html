@@ -34,6 +34,7 @@
                                                 <th style="min-width: 60px;">Alias</th>
                                                 <th style="min-width: 60px;">Descripcion</th>
                                                 <th style="min-width: 60px;">Username</th>
+                                                 <th style="min-width: 60px;">Activa</th>
                                                 <th style="min-width: 90px; " >Modificar</th>
 
                                             </tr>
@@ -51,7 +52,7 @@
                                                     <td ng-show="!vota.Mostrar_Votaciones">
                                                             {{vota.Nombre}}
                                                     </td>
-
+                                   
                                                     <td ng-show="!vota.Mostrar_Votaciones"> 
                                                             {{vota.Alias}}
                                                     </td>
@@ -63,6 +64,16 @@
                                                     <td ng-show="!vota.Mostrar_Votaciones">
                                                             {{vota.Username}}
                                                     </td>
+                                                    
+
+                                                    <td  ng-show="!vota.Mostrar_Votaciones" ng-show="!vota.Mostrar_Votaciones">
+                                                         <button ng-click="Cambiar_actual(vota)" ng-class="{'btn-primary': vota.actual==1, 'btn-danger': vota.actual==0}">
+                                                            <i ng-show="vota.actual==0" class="mdi mdi-thumb-down"></i>
+                                                            <i ng-show="vota.actual==1" class="mdi mdi-thumb-up"></i>
+                                                        </button>
+                                                           
+                                                    </td>
+
 
                                                     
                                                     <td ng-show="!vota.Mostrar_Votaciones">
@@ -76,6 +87,9 @@
                                                             </button>
                                                             <button class="btn btn-sm waves-effect waves-light btn-primary btn-sm" ng-click="Ver_Planchas(vota.rowid)" uib-tooltip="Ver Planchas">
                                                                 <i class="mdi mdi-eye"></i>
+                                                            </button>
+                                                             <button class="btn btn-sm waves-effect waves-light btn-success btn-sm" ng-click="elegir_votacion(vota)" uib-tooltip="Copiar participantes">
+                                                                <i class="mdi mdi-share"></i>
                                                             </button>
                                                         </div>
                                                         
@@ -98,6 +112,13 @@
 
                                                     <td ng-show="vota.Mostrar_Votaciones"> 
                                                             <input class="text-pequenio2" type="text" ng-model="vota.Username" name=""> 
+                                                    </td>
+
+                                                    <td ng-show="vota.Mostrar_Votaciones"> 
+                                                             <select class="text-pequenio3" ng-model="vota.actual" >
+                                                                <option>si</option>
+                                                                <option>no</option>
+                                                            </select> 
                                                     </td>
 
                         
@@ -133,6 +154,13 @@
 
                                                     <td >
                                                             <input class="text-pequenio2" type="text" ng-value="Username" ng-model="Votaciones_nuevo.Username" > 
+                                                    </td>
+
+                                                    <td >                                                   
+                                                            <select class="text-pequenio3" ng-model="Votaciones_nuevo.actual" >
+                                                                <option>si</option>
+                                                                <option>no</option>
+                                                            </select>
                                                     </td>
 
                                                     <td >

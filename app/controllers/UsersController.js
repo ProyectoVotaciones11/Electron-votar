@@ -43,7 +43,7 @@ function postRouteHandler(req, res) {
 }
 function putParticipantesPorGruposHandler(req, res) {
 
-	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid WHERE Grupo_id=?";
+	consulta = "SELECT P.*, P.rowid, V.Nombre, V.Alias from Participantes P INNER JOIN votaciones V ON P.Votacion_id = V.rowid WHERE Grupo_id=? and V.actual=1";
 	
 	db.query(consulta, [req.body.Grupo_id]).then (function(result){
 

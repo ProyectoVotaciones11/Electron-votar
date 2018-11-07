@@ -6,6 +6,7 @@ angular.module('votacioneslive')
 	$scope.Votaciones_nuevo = {};
 	$scope.Mostrar_tabla_crear = false;
 	$scope.Mostrar_planchas = false;
+	
 
 	if ($scope.USER.Tipo != "Admin") {
 		 $state.go('panel');
@@ -16,7 +17,21 @@ angular.module('votacioneslive')
 
 			$http.get('::votaciones').then (function(result){
 			  $scope.votaciones = result.data ;
-					
+
+			  
+
+				}, function(tx){
+					toastr.error('Error trayendo votaciones');
+				});
+
+		}
+
+		$scope.Tabla_Votaciones = function(){
+
+			$http.get('::votaciones').then (function(result){
+			  $scope.votaciones = result.data ;
+
+			  
 
 				}, function(tx){
 					toastr.error('Error trayendo votaciones');
@@ -37,9 +52,23 @@ angular.module('votacioneslive')
 			return;
 		}
 
-			$http.get('::votaciones/insertar',  {params: { Nombre: crear.Nombre, Alias: crear.Alias, descripcion: crear.descripcion, Username: crear.Username}}).then(function(result){
-			
+		if (crear.actual == "si") {
+			crear.actual = 1;
 
+			$http.get('::votaciones/actual').then(function(result){
+			
+				}, function(tx){
+					console.log('error', tx);
+				});
+
+		}else{
+			crear.actual = 0;
+		}
+
+
+			$http.get('::votaciones/insertar',  {params: { Nombre: crear.Nombre, Alias: crear.Alias, actual: crear.actual,  descripcion: crear.descripcion, Username: crear.Username}}).then(function(result){
+			
+			
 					$scope.Mostrar_tabla_crear = false;
 
 					$scope.Votaciones_nuevo = {};
@@ -65,13 +94,68 @@ angular.module('votacioneslive')
 
 		}
 
+	$scope.Copiar_participantes = function(votaciones, vota){
+
+		console.log(votaciones, vota)
+		
+		$http.put('::votaciones/Copiar-Participantes', { Votacion_id: vota.rowid, Votacion_copiada_rowid: votaciones.rowid} ).then (function(result){
+
+
+				$scope.Tabla_Votaciones();	
+
+		   }, function(tx){
+			   console.log('error', tx);
+		   });
+
+		}
+
+
+	$scope.elegir_votacion = function( vota ){
+		
+
+	    var modalInstance = $uibModal.open({
+	        templateUrl: 'templates/elegirVotacion.html',
+	        resolve: {
+		        votaciones: function () {
+		        	return $scope.votaciones;
+		        },
+		        
+		    },
+	        controller: 'VotaCtrlModal' // En LibroMesModales.js 
+	    });
+
+	    modalInstance.result.then(function (result) {
+			console.log(result);
+
+			$scope.Copiar_participantes(result, vota);
+
+	    }, function(r2){
+	    	
+	    });
+			
+	}
+
 
 	$scope.Modificar_Votaciones = function(modificar){
 
 		if(modificar.Mostrar_Votaciones == true){
 			modificar.Mostrar_Votaciones = false;
 
-			$http.get('::votaciones/editar',  {params: { Nombre: modificar.Nombre, Alias: modificar.Alias, descripcion: modificar.descripcion, Username: modificar.Username, Password: modificar.Password, rowid: modificar.rowid}}).then(function(result){
+			if (modificar.actual == "si") {
+			modificar.actual = 1;
+
+			$http.get('::votaciones/actual').then(function(result){
+			
+				}, function(tx){
+					console.log('error', tx);
+				});
+
+			}else{
+				modificar.actual = 0;
+			}
+
+
+			$http.get('::votaciones/editar',  {params: { Nombre: modificar.Nombre, Alias: modificar.Alias, descripcion: modificar.descripcion, actual: modificar.actual, Username: modificar.Username, Password: modificar.Password, rowid: modificar.rowid}}).then(function(result){
 				
 
 				$scope.Tabla_Votaciones();	
@@ -86,6 +170,28 @@ angular.module('votacioneslive')
 			$scope.votaciones[i].Mostrar_Votaciones = false;
 		}
 		modificar.Mostrar_Votaciones = true;
+
+	}
+
+	$scope.Cambiar_actual = function(vota){
+
+		if (vota.actual == 0 ) {
+			$http.get('::votaciones/actual').then(function(result){
+
+					$http.get('::votaciones/actual2',  {params: { rowid: vota.rowid}}).then(function(result){
+
+						$scope.Tabla_Votaciones();	
+							
+						}, function(tx){
+							console.log('error', tx);
+						});	
+
+				}, function(tx){
+					console.log('error', tx);
+				});
+		}
+
+			
 
 	}
 	
@@ -265,6 +371,24 @@ angular.module('votacioneslive')
 
     $scope.ok = function () {
        $uibModalInstance.close(votacion);
+    };
+
+
+    return ;
+})
+
+.controller("VotaCtrlModal", function($uibModalInstance, $scope, votaciones , ConexionServ, toastr, $filter, $http) { 
+
+        $scope.Votaciones = votaciones;
+         console.log(  votaciones);
+
+	$scope.Votacion_elegida = function (vota) {
+       $uibModalInstance.close(vota);
+    };
+	
+
+    $scope.ok = function () {
+       $uibModalInstance.close();
     };
 
 
