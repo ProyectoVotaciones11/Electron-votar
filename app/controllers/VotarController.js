@@ -14,7 +14,7 @@ function getRouteHandler(req, res) {
 
 
 
-	consulta = "SELECT rowid, * from Aspiraciones WHERE Votacion_id=?";
+	consulta = "SELECT a.rowid, a.* from Aspiraciones a INNER JOIN Votaciones v ON a.votacion_id = v.rowid WHERE a.Votacion_id=?  AND V.actual=1 ";
 
 	params = req.query;
 

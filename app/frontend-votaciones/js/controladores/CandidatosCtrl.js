@@ -36,9 +36,23 @@ angular.module('votacioneslive')
 
 	}
 
+	$scope.Tabla_de_PLanchas = function(){
+
+		$http.get('::Plancha').then (function(result){
+			  $scope.Planchas = result.data ;
+
+			  console.log( $scope.Planchas);
+
+		}, function(tx){
+			console.log('error', tx);
+		});
+
+	}
+
 	$scope.Tabla_de_aspiraciones();
 
 	$scope.Tabla_candidatos();
+	$scope.Tabla_de_PLanchas();
 
 
 		$scope.Modificar_Candidatos = function(modificar){
@@ -46,7 +60,7 @@ angular.module('votacioneslive')
 		if(modificar.Mostrar_Candidatos == true){
 			modificar.Mostrar_Candidatos = false;
 
-		$http.get('::candidatos/editar',  {params: { rowid: modificar.rowid, Nombres: modificar.Nombres, Apellidos: modificar.Apellidos, Sexo: modificar.Sexo, Foto: modificar.Foto, aspiracion_id: modificar.aspiracion_id , Grupo_id: modificar.Grupo_id } }).then (function(result){
+		$http.get('::candidatos/editar',  {params: { rowid: modificar.rowid, Plancha: modificar.Plancha_id,  Nombres: modificar.Nombres, Apellidos: modificar.Apellidos, Sexo: modificar.Sexo, Foto: modificar.Foto, aspiracion_id: modificar.aspiracion_id , Grupo_id: modificar.Grupo_id } }).then (function(result){
                				
 								$scope.Tabla_candidatos();
 
@@ -79,7 +93,7 @@ angular.module('votacioneslive')
 			return;
 		}
 
-		$http.get('::candidatos/insertar', {params: {Nombres: crear.Nombres, Apellidos: crear.Apellidos, Sexo: crear.Sexo, Grupo_id: crear.Grupo_id, Foto: crear.Foto, aspiracion_id: crear.aspiracion_id}}).then(function(result){
+		$http.get('::candidatos/insertar', {params: {Nombres: crear.Nombres, Apellidos: crear.Apellidos, Plancha: crear.Plancha_id , Sexo: crear.Sexo, Grupo_id: crear.Grupo_id, Foto: crear.Foto, aspiracion_id: crear.aspiracion_id}}).then(function(result){
 	
 			$scope.Tabla_candidatos();
 

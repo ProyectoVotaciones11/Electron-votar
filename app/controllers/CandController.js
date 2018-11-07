@@ -15,7 +15,8 @@ router.route('/cambiar-pass').get(getCambiarPassHandler);
 function getRouteHandler(req, res) {
 
 	consulta = "SELECT C.*, C.rowid, p.Nombre as planchas_nombre, a.aspiracion from Candidatos C INNER JOIN Aspiraciones a ON C.aspiracion_id = a.rowid "+
-				" INNER JOIN Planchas p ON C.Plancha_id = p.rowid";
+				" INNER JOIN Planchas p ON C.Plancha_id = p.rowid  " +
+				" INNER JOIN Votaciones V ON a.votacion_id = V.rowid AND p.votacion_id = V.rowid AND V.actual=1";
 	db.query(consulta).then(function(result){
         Candidatos = result ;
     	res.json(Candidatos);
@@ -31,10 +32,10 @@ function postRouteHandler(req, res) {
 
 function getEditarHandler(req, res) {
 
-	consulta = "UPDATE Candidatos  SET Nombres=? , Apellidos=? , Sexo=? , Grupo_id=? , Foto=?, aspiracion_id=? WHERE rowid=?  ";
+	consulta = "UPDATE Candidatos  SET Nombres=? , Apellidos=? , Plancha_id=?, Sexo=? , Grupo_id=? , Foto=?, aspiracion_id=? WHERE rowid=?  ";
 	params = req.query;
 
-	datos = [params.Nombres, params.Apellidos, params.Sexo, params.Grupo_id, params.Foto , params.aspiracion_id, params.rowid];     
+	datos = [params.Nombres, params.Apellidos, params.Plancha, params.Sexo, params.Grupo_id, params.Foto , params.aspiracion_id, params.rowid];     
 	db.query(consulta, datos).then (function(result){
      
         res.send('Editado');
@@ -58,9 +59,9 @@ function getCambiarPassHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 
-	consulta = "INSERT INTO Candidatos( Nombres, Apellidos, Sexo, Grupo_id,  Foto, aspiracion_id ) VALUES( ?, ?, ?, ?, ?, ?)";
+	consulta = "INSERT INTO Candidatos( Nombres, Apellidos, Plancha_id, Sexo, Grupo_id,  Foto, aspiracion_id ) VALUES( ?, ?, ?, ?, ?, ?, ?)";
 	params = req.query;
-	datos = [params.Nombres, params.Apellidos, params.Sexo, params.Grupo_id, params.Foto, params.aspiracion_id];     
+	datos = [params.Nombres, params.Apellidos, params.Plancha, params.Sexo, params.Grupo_id, params.Foto, params.aspiracion_id];     
 	db.query(consulta, datos).then (function(result){
         res.send('Insertado');
 	}, function(error){

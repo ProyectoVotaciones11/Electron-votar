@@ -39,9 +39,9 @@ function crearDatosIniciales() {
                                                                   "('7','Martin Daniel','Rincon Molina','M','11' , '3','images/users/7.jpg','1'), " +
                                                                   "('8','Leidy Paola',' Garcia Parra','F','11', '3','images/users/3.jpg','2'), " +
                                                                   "('9','Angel Guillermo','Peñaredonda Silva','M','11', '3','images/users/5.jpg','3'),"+ 
-                                                                  "('10','Voto', 'En Blanco', 'I', '0' , '4','images/users/voto-blanco.jpg', 1),"+
-                                                                  "('100','Voto', 'En Blanco', 'I', '0' , '4','images/users/voto-blanco.jpg', 2),"+
-                                                                  "('1000','Voto', 'En Blanco', 'I', '0' , '4','images/users/voto-blanco.jpg', 3)";
+                                                                  "('10','Voto', 'En Blanco', 'M', '11' , '4','images/users/voto-blanco.jpg', 1),"+
+                                                                  "('11','Voto', 'En Blanco', 'M', '11' , '4','images/users/voto-blanco.jpg', 2),"+
+                                                                  "('12','Voto', 'En Blanco', 'M', '11' , '4','images/users/voto-blanco.jpg', 3)";
                                                                   
                         db.query(consulta).then(function(res){
                             resolve2('Candidatos Insertados');

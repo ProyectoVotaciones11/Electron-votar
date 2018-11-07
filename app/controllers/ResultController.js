@@ -13,7 +13,7 @@ function getRouteHandler(req, res) {
 
 
 
-	consulta = "SELECT rowid, * from Aspiraciones WHERE votacion_id=?";
+	consulta = "SELECT a.rowid, a.* from Aspiraciones a INNER JOIN Votaciones v ON a.votacion_id = v.rowid WHERE a.Votacion_id=?  AND V.actual=1 ";
 
 	params = req.query;
 
@@ -37,7 +37,9 @@ function postRouteHandler(req, res) {
 
 function CadidatosAspiracionHandler(req, res) {
 
-	consulta = "SELECT C.*, C.rowid, count(v.rowid) as cantidad from Candidatos C "+
+	consulta = "SELECT C.*, C.rowid, p.Nombre as planchas_nombre, count(v.rowid) as cantidad from Candidatos C "+	
+			"INNER JOIN Planchas p ON C.Plancha_id = p.rowid  "+
+			"INNER JOIN Votaciones t ON p.votacion_id = t.rowid AND t.actual=1 "+
 			"LEFT JOIN Votos v ON v.candidato_id = C.rowid "+
 			" WHERE C.aspiracion_id = ? GROUP BY C.rowid ";
 	    

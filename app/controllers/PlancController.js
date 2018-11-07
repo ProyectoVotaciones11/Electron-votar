@@ -14,7 +14,7 @@ router.route('/insertar').get(getInsertarHandler);
 
 function getRouteHandler(req, res) {
 
-    consulta = "SELECT p.*, p.rowid, v.Nombre from Planchas p INNER JOIN Votaciones v ON p.votacion_id = v.rowid ";
+    consulta = "SELECT p.*, p.rowid, v.Nombre,  p.Nombre as Nombre_plancha from Planchas p INNER JOIN Votaciones v ON p.votacion_id = v.rowid And V.actual=1";
     db.query(consulta).then(function(result){
         Planchas = result ;
         res.json(Planchas);

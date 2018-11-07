@@ -115,11 +115,10 @@
 
                                                                      <td ng-show="candi.Mostrar_Candidatos">
 
-                                                                     <select class="text-pequenio3" ng-model="candi.Plancha_id" >
+                                                                     <select class="text-pequenio3"  ng-model="candi.Plancha_id" >
 
-                                                                                <option>Plancha_A</option>
-                                                                                <option>Plancha_B</option>
-                                                                                 <option>Plancha_C</option>
+                                                                                <option ng-repeat="planch in Planchas" value="{{candi.rowid}}">{{planch.Nombre_plancha}}</option>
+                                                                                
                                                                                  
                                                                         </select>
 
@@ -179,7 +178,13 @@
                                                                         </td>
                                                                         
                                                                         <td> 
-                                                                            <input class="text-pequenioe" type="text" ng-value="" ng-model="Candidatos_nuevo.Plancha_id" > 
+
+                                                                             <select class="text-pequenio3"  ng-model="Candidatos_nuevo.Plancha_id" >
+
+                                                                                <option ng-repeat="planch in Planchas" value="{{planch.rowid}}">{{planch.Nombre_plancha}}</option>
+                                                                                 
+                                                                             </select>
+
                                                                         </td>
 
                                                                        <td > 

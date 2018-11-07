@@ -123,7 +123,7 @@ function putSubirPassHandler(req, res) {
 			username_profesor = grupos[i].nombres_titular +  grupos[i].abrev
 
 				consulta = "INSERT INTO Participantes(  Nombres, Apellidos, Username, Password, Grupo_id, Votacion_id, Tipo ) VALUES( ?, ?, ?, ?, ?, ?, ?)";
-				promer = db.query(consulta, [grupos[i].nombres_titular, grupos[i].apellidos_titular, username_profesor, '123',  grupos[i].abrev, '1', 'Cuidador']);
+				promer = db.query(consulta, [grupos[i].nombres_titular, grupos[i].apellidos_titular, username_profesor, '123',  '0', '1', 'Cuidador']);
 				
 				promesas.push(promer);
 				
