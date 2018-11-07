@@ -13,6 +13,7 @@ router.route('/cambiar-pass').get(getCambiarPassHandler);
 router.route('/Traer-planchas').get(getPlachasPassHandler);
 router.route('/actual').get(getactualPassHandler);
 router.route('/Copiar-Participantes').put(putCopiarParticipantesPassHandler);
+router.route('/Borrar-participantes').get(getBorrarparticipantesPassHandler);
 router.route('/actual2').get(getactual2PassHandler)
 
 
@@ -120,8 +121,10 @@ function putCopiarParticipantesPassHandler(req, res) {
 				
 				part = ParticipantesVotacion[i];
 
+				username = part.Username + req.body.Votacion_id;
+
 			
-				datos = [part.Nombres, part.Apellidos, part.Username, part.Password, part.Sexo, part.Grupo_id, req.body.Votacion_id, part.Tipo]; 
+				datos = [part.Nombres, part.Apellidos, username, part.Password, part.Sexo, part.Grupo_id, req.body.Votacion_id, part.Tipo]; 
 
 				prome = db.query(consulta,datos);
 				
@@ -145,7 +148,16 @@ function putCopiarParticipantesPassHandler(req, res) {
 
 };
 
-
+function getBorrarparticipantesPassHandler(req, res) {
+    
+	consulta = "DELETE FROM Participantes WHERE Votacion_id = ? ";
+	db.query(consulta, [req.query.id]).then (function(result){
+		res.send('Eliminado');
+	}, function(error){
+		
+		res.status(400).send({ error: error })
+	})
+};
 
 
 function deleteUsuarioHandler(req, res) {

@@ -13,12 +13,12 @@ function getRouteHandler(req, res) {
 
 
 
-	consulta = "SELECT a.rowid, a.* from Aspiraciones a INNER JOIN Votaciones v ON a.votacion_id = v.rowid WHERE a.Votacion_id=?  AND V.actual=1 ";
+	consulta = "SELECT a.rowid, a.* from Aspiraciones a INNER JOIN Votaciones v ON a.votacion_id = v.rowid AND v.actual=1   ";
 
 	params = req.query;
 
 	datos = [params.Votacion_id];
-	db.query(consulta, datos).then(function(result){
+	db.query(consulta).then(function(result){
         Aspiraciones = result ;
     	res.json(Aspiraciones);
     }, function(error){

@@ -26,9 +26,9 @@ angular.module('votacioneslive')
 
 		}
 
-		$scope.Tabla_Votaciones = function(){
+		$scope.Borrar_Participantes = function(votacion){
 
-			$http.get('::votaciones').then (function(result){
+			$http.get('::votaciones/Borrar-participantes',{params: { id: votacion.rowid} }).then (function(result){
 			  $scope.votaciones = result.data ;
 
 			  

@@ -87,6 +87,8 @@ router.route('/exportar-usuarios').get(getExportarUsuariosHandler);
 
       consulta = "SELECT C.*, a.aspiracion, C.rowid, count(v.rowid) as cantidad from Candidatos C " +
         "INNER JOIN Aspiraciones a ON C.aspiracion_id = a.rowid "+
+        "INNER JOIN Planchas p ON C.Plancha_id = p.rowid "+
+        "INNER JOIN Votaciones t ON a.votacion_id = t.rowid AND t.actual=1 "+
         "LEFT JOIN Votos v ON v.candidato_id = C.rowid  " +
         "GROUP BY C.rowid ORDER BY C.aspiracion_id";
 
