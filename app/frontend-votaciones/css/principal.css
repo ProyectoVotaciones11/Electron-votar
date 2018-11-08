@@ -137,3 +137,15 @@ a.nav-link{
         display: none !important;
     }
 }
+
+.estrechar uib-accordion{
+    padding: 0;
+}
+.estrechar uib-accordion panel-group panel panel-collapse panel-body{
+    padding: 0;
+}
+@media print{
+    .esconder{
+        display: none;
+    }
+}

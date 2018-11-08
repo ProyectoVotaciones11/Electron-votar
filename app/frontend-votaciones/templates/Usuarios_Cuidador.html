@@ -13,22 +13,25 @@
 
   <div class="col-md-12">
       
-    <div class="card" >
+    <div  class="card" >
          
-        <div class="card-block">
+        <div  class="card-block" >
 
             
-            <div  >
+            <div class="estrechar" >
 
                  <uib-accordion class="col-sm-3">
     
-                     <div uib-accordion-group  is-open="status.open">
+                     <div style="padding: 0;" uib-accordion-group  is-open="status.open">
                         <uib-accordion-heading>
-                         <h1>ninguna </h1>
+                         <h2 class="col-sm-4">Disponibles </h2>
                         </uib-accordion-heading>
-                        <div class="col-sm-12">
-                          <span class="card col-sm-12" ng-repeat="Participante in Participantes "  ng-click="Ver_Control(Participante)">
-                            <span  class="card-block">
+                        <div   class="col-sm-12" style="padding: 0;">
+                          <span class="card col-sm-12" ng-repeat="Participante in Participantes "  
+                            ng-click="Ver_Control(Participante)" 
+                            style="margin-bottom: 6px;">
+                            
+                            <span  class="card-block" style="padding: 4px;">
                                 <div>{{$index + 1 }}  {{Participante.Nombres}}  {{Participante.Apellidos}} : <strong>{{Participante.punto}}</strong> </div>             
                               </span>
                           </span>
@@ -41,13 +44,13 @@
 
                   <uib-accordion ng-repeat="aspiracion in aspiraciones" class="col-sm-3">
     
-                     <div uib-accordion-group  is-open="status.open">
+                     <div style="padding: 0;" uib-accordion-group  is-open="status.open">
                         <uib-accordion-heading>
-                         <h1 class="col-sm-4">{{ aspiracion.aspiracion }}</h1> 
+                         <h2 class="col-sm-4">{{ aspiracion.aspiracion }}</h2> 
                         </uib-accordion-heading>
-                        <div class="col-sm-12">
-                          <span class="card col-sm-12"  ng-repeat="Participante in puntos | participantesInAspiracion:aspiracion.rowid " ng-click="Ver_Usuario(Participante)">
-                            <span  class="card-block">
+                        <div class="col-sm-12"  style="padding: 0;">
+                          <span class="card col-sm-12"  ng-repeat="Participante in puntos | participantesInAspiracion:aspiracion.rowid " ng-click="Ver_Usuario(Participante)"  style="margin-bottom: 6px;">
+                            <span  class="card-block" style="padding: 4px;">
                                 <div>{{$index + 1 }}  {{Participante.user_data.Nombres}}  {{Participante.user_data.Apellidos}} : <strong>{{Participante.nombre_punto}}</strong> </div>             
                               </span>
                           </span>
